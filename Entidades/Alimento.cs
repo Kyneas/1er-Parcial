@@ -6,20 +6,18 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    public class Alimento
+    public abstract class Alimento
     {
         private string nombre;
         private float precio;
         private int cantidad;
-        private bool esBebida;
         private int stock;
 
-        public Alimento(string nombre, float precio, int cantidad, bool esBebida, int stock)
+        public Alimento(string nombre, float precio, int cantidad, int stock)
         {
             this.nombre = nombre;
             this.precio = precio;
             this.cantidad = cantidad;
-            this.esBebida = esBebida;
             this.stock = stock;
         }
 
@@ -67,10 +65,7 @@ namespace Entidades
             return value;
         }
 
-        public bool EsBebida
-        {
-            get { return this.esBebida; }
-        }
+        public abstract string NombreCompleto { get; }
 
         public bool HayExistencias
         {

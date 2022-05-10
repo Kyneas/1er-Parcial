@@ -29,43 +29,25 @@ namespace Entidades
         private static void CargarUsuariosHardcodeados()
         {
             listaEmpleados.Add(12, new Persona("Matias", "Ferreira", "asd123", true));
-            listaEmpleados.Add(34, new Persona("Roberto", "Bolaños", "gf4", false));
+            listaEmpleados.Add(34, new Persona("Roberto", "Gomez Bolaños", "gf457gfh4", false));
+            listaEmpleados.Add(34576, new Persona("David", "Bisbal", "gf845htr764", true));
+            listaEmpleados.Add(45674, new Persona("Pedro", "El Escamoso", "gfgh56hfgf4", false));
         }
 
         private static void CargarPosicionesHardcodeadas()
         {
             for (int i = 1; i <= 15; i++)
             {
-                listaPosiciones.Add(i, new Posicion(Posicion.Donde.Mesa, false));
+                listaPosiciones.Add(i, new Posicion(Posicion.Donde.Mesa));
                 LlenarMesaConListaAlimentos(listaPosiciones, i);
             }
             for (int i = 16; i <= 20; i++)
             {
-                listaPosiciones.Add(i, new Posicion(Posicion.Donde.Barra, false));
+                listaPosiciones.Add(i, new Posicion(Posicion.Donde.Barra));
                 LlenarMesaConListaAlimentos(listaPosiciones, i);
             }
 
         }
-        /*
-         private void MostrarAlimentos(string id, string nombreComida, string precio, string cantidad)
-        {
-            String[] fila = { id, nombreComida, precio, cantidad };
-            ListViewItem item = new ListViewItem(fila);
-            this.lvwListaAlimentos.Items.Add(item);
-        }
-
-        public void AgregarTodasLosAlimentos()
-        {
-            foreach (KeyValuePair<int, Alimento> item in lugar.ListaComidaPedida)
-            {
-                MostrarAlimentos(item.Key.ToString(), item.Value.Nombre, item.Value.Precio.ToString(), item.Value.Cantidad.ToString());
-            }
-        }*/
-
-        //private static void PasarDeDiccionarioAListView(ListView sdfsdf)
-        //{
-
-        //}
 
         private static void LlenarMesaConListaAlimentos(Dictionary<int,Posicion> listaLugar, int posicion)
         {
@@ -73,7 +55,11 @@ namespace Entidades
 
             foreach (KeyValuePair<int,Alimento> item in Sistema.listaAlimentos)
             {
-                listaNueva.Add(item.Key, new Alimento(item.Value.Nombre, item.Value.Precio, item.Value.Cantidad, item.Value.EsBebida, item.Value.Stock));
+                if (item.Value is Comida &&
+                    listaLugar[posicion].Lugar == Posicion.Donde.Mesa)
+                    listaNueva.Add(item.Key, new Comida(item.Value.Nombre, item.Value.Precio, item.Value.Cantidad, item.Value.Stock, ((Comida)item.Value).Vegano));
+                if (item.Value is Bebida)
+                    listaNueva.Add(item.Key, new Bebida(item.Value.Nombre, item.Value.Precio, item.Value.Cantidad, item.Value.Stock, ((Bebida)item.Value).Presentacion));
             }
 
             listaLugar[posicion].ListaComidaPedida = listaNueva;
@@ -81,13 +67,13 @@ namespace Entidades
 
         private static void CargarAlimentosHardcodeados()
         {
-            listaAlimentos.Add(++idAlimento, new Alimento("Pizza", 100, 0, false, 5));
-            listaAlimentos.Add(++idAlimento, new Alimento("Fideos", 70, 0, false, 5));
-            listaAlimentos.Add(++idAlimento, new Alimento("Milanesa", 90, 0, false, 5));
-            listaAlimentos.Add(++idAlimento, new Alimento("Asado", 150, 0, false, 5));
-            listaAlimentos.Add(++idAlimento, new Alimento("Gaseosa", 40,0, true, 5));
-            listaAlimentos.Add(++idAlimento, new Alimento("Agua", 25, 0, true, 5));
-            listaAlimentos.Add(++idAlimento, new Alimento("Vino", 50, 0, true, 5));
+            listaAlimentos.Add(++idAlimento, new Comida("Pizza", 100, 0, 14, true));
+            listaAlimentos.Add(++idAlimento, new Comida("Fideos", 70, 0, 14, true));
+            listaAlimentos.Add(++idAlimento, new Comida("Milanesa", 90, 0, 14, false));
+            listaAlimentos.Add(++idAlimento, new Comida("Asado", 150, 0, 14, false));
+            listaAlimentos.Add(++idAlimento, new Bebida("Coca", 40,0, 14, Bebida.Tamanio.Lata_330ml));
+            listaAlimentos.Add(++idAlimento, new Bebida("Agua", 25, 0, 14, Bebida.Tamanio.Botella_1500ml));
+            listaAlimentos.Add(++idAlimento, new Bebida("Vino", 50, 0, 14, Bebida.Tamanio.Botella_710ml));
         }
 
         public static bool CrearNuevoUsuario(string dniString, string nombre, string apellido, string clave, bool esAdmin)
@@ -119,7 +105,19 @@ namespace Entidades
             if (String.Empty != dniString && listaEmpleados.ContainsKey(int.Parse(dniString)))
                 return listaEmpleados[int.Parse(dniString)];
                 return null;
-            
+        }
+
+        public static bool ExisteMesa(string mesaABuscarString, out int mesaInt) 
+        {
+            if (!string.IsNullOrEmpty(mesaABuscarString) &&
+                int.TryParse(mesaABuscarString, out int mesa) &&
+                listaPosiciones.ContainsKey(mesa)) 
+            {
+                mesaInt = mesa;
+                return true;
+            }
+            mesaInt = 0;
+            return false;
         }
 
         public static bool VerificarLogin(Persona usuario, string clave)

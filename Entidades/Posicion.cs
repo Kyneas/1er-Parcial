@@ -17,10 +17,10 @@ namespace Entidades
         private bool ocupada;
         Dictionary<int, Alimento> listaComidaPedida;
 
-        public Posicion(Donde lugar, bool ocupada)
+        public Posicion(Donde lugar)
         {
             this.lugar = lugar;
-            this.Ocupada = ocupada;
+            this.ocupada = false;
         }
 
         public Dictionary<int, Alimento> ListaComidaPedida
@@ -63,7 +63,7 @@ namespace Entidades
 
         private float VerificarSaldo()
         {
-            
+
             if (this.listaComidaPedida.Count == 0)
                 return 0;
             float acumulador = 0;
@@ -82,5 +82,6 @@ namespace Entidades
                 alimento.Cantidad = 0;
             }
         }
+
     }
 }

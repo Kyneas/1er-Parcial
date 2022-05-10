@@ -22,17 +22,26 @@ namespace Bar
             InitializeComponent();
         }
 
-        public CargaDePedido(int mesa, Posicion lugar) : this()
+        public CargaDePedido(int mesa, Posicion lugarOriginal) : this()
         {
             this.mesa = mesa;
-            this.lugarOriginal = lugar;
-            this.lugar = new Posicion(lugar.Lugar,lugar.Ocupada);
+            this.lugarOriginal = lugarOriginal;
+            this.lugar = new Posicion(lugarOriginal.Lugar);
             this.lugar.ListaComidaPedida = new Dictionary<int, Alimento>();
-            foreach (KeyValuePair<int,Alimento> item in lugar.ListaComidaPedida)
+            foreach (KeyValuePair<int,Alimento> item in lugarOriginal.ListaComidaPedida)
             {
-                this.lugar.ListaComidaPedida.Add(item.Key,new Alimento(lugar.ListaComidaPedida[item.Key].Nombre,
-                    lugar.ListaComidaPedida[item.Key].Precio, lugar.ListaComidaPedida[item.Key].Cantidad,
-                    lugar.ListaComidaPedida[item.Key].EsBebida, Sistema.listaAlimentos[item.Key].Stock));
+                if (item.Value is Comida)
+                {
+                    this.lugar.ListaComidaPedida.Add(item.Key, new Comida(lugarOriginal.ListaComidaPedida[item.Key].Nombre,
+                    lugarOriginal.ListaComidaPedida[item.Key].Precio, lugarOriginal.ListaComidaPedida[item.Key].Cantidad, Sistema.listaAlimentos[item.Key].Stock,
+                    ((Comida)lugarOriginal.ListaComidaPedida[item.Key]).Vegano));
+                }
+                if (item.Value is Bebida)
+                {
+                    this.lugar.ListaComidaPedida.Add(item.Key, new Bebida(lugarOriginal.ListaComidaPedida[item.Key].Nombre,
+                    lugarOriginal.ListaComidaPedida[item.Key].Precio, lugarOriginal.ListaComidaPedida[item.Key].Cantidad, Sistema.listaAlimentos[item.Key].Stock,
+                    ((Bebida)lugarOriginal.ListaComidaPedida[item.Key]).Presentacion));
+                }
             }
         }
 
@@ -40,23 +49,16 @@ namespace Bar
         {
             lblSaldo.Text = $"Saldo: ${lugar.Saldo}";
             lblNumeroMesa.Text = $"Mesa: {mesa}";
-            this.lvwListaAlimentos.FullRowSelect = true;
+            this.lvwListaAlimentos.FullRowSelect = true;//Seleccionar toda la fila
             ValidarSiHaySaldoParaHabilitarBotones();
             AgregarTodasLosAlimentos();
-        }
-
-        private void MostrarAlimentos(string id, string nombreComida, string precio, string cantidad)
-        {
-            String[] fila = { id, nombreComida, precio, cantidad };
-            ListViewItem item = new ListViewItem(fila);
-            this.lvwListaAlimentos.Items.Add(item);
         }
 
         public void AgregarTodasLosAlimentos()
         {
             foreach (KeyValuePair<int, Alimento> item in lugar.ListaComidaPedida)
             {
-                MostrarAlimentos(item.Key.ToString(), item.Value.Nombre, item.Value.Precio.ToString(), item.Value.Cantidad.ToString());
+                LogicaForms.AgregarFilaAListView(lvwListaAlimentos, item.Key.ToString(), item.Value.NombreCompleto, item.Value.Precio.ToString(), item.Value.Cantidad.ToString());
             }
         }
 
@@ -146,12 +148,10 @@ namespace Bar
             if (lugar.Saldo == 0)
             {
                 btnCerrarMesa.Enabled = false;
-                btbConfirmarPedido.Enabled = false;
             }
             else
             {
                 btnCerrarMesa.Enabled = true;
-                btbConfirmarPedido.Enabled = true;
             }
         }
 
@@ -170,7 +170,5 @@ namespace Bar
         {
             this.Dispose();
         }
-
-
     }
 }

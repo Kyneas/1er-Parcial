@@ -29,6 +29,7 @@ namespace Bar
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             this.lblDni = new System.Windows.Forms.Label();
             this.lblClave = new System.Windows.Forms.Label();
             this.btnLoguear = new System.Windows.Forms.Button();
@@ -142,11 +143,15 @@ namespace Bar
             // 
             // btbSalir
             // 
-            this.btbSalir.Location = new System.Drawing.Point(245, 12);
+            this.btbSalir.FlatAppearance.BorderSize = 0;
+            this.btbSalir.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btbSalir.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btbSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btbSalir.Image = ((System.Drawing.Image)(resources.GetObject("btbSalir.Image")));
+            this.btbSalir.Location = new System.Drawing.Point(278, 259);
             this.btbSalir.Name = "btbSalir";
-            this.btbSalir.Size = new System.Drawing.Size(75, 23);
+            this.btbSalir.Size = new System.Drawing.Size(42, 42);
             this.btbSalir.TabIndex = 10;
-            this.btbSalir.Text = "Salir";
             this.btbSalir.UseVisualStyleBackColor = true;
             this.btbSalir.Click += new System.EventHandler(this.btbSalir_Click);
             // 
@@ -154,6 +159,7 @@ namespace Bar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(332, 313);
             this.Controls.Add(this.btbSalir);
             this.Controls.Add(this.lblNoDni);

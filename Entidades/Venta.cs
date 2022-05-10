@@ -43,7 +43,7 @@ namespace Entidades
             sb.AppendLine("------------------------------");
             foreach (Alimento item in listaComida)
             {
-                sb.AppendLine($"#{item.Cantidad} {item.Nombre} {item.Precio} {item.Cantidad * item.Precio}");
+                sb.AppendLine($"#{item.Cantidad,-5} {item.NombreCompleto,-30} {item.Precio,-5} {(item.Cantidad * item.Precio),-5}");
             }
             sb.AppendLine("------------------------------");
             return sb.ToString();

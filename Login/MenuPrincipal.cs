@@ -9,11 +9,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Entidades;
 
+
 namespace Bar
 {
     public partial class MenuPrincipal : Form
     {
         Persona usuario;
+        bool admin;
         private MenuPrincipal()
         {
             InitializeComponent();
@@ -22,41 +24,51 @@ namespace Bar
         public MenuPrincipal(Persona usuario) : this()
         {
             this.usuario = usuario;
-            lblBienvenida.Text = $"que hace {usuario.Nombre}";
+            lblBienvenida.Text = $"Buenas {usuario.Nombre}";
         }
 
         private void MenuPrincipal_Load(object sender, EventArgs e)
         {
             this.lblEsAdmn.Visible = usuario.EsAdmin;
-
+            this.btnAdmin.Visible = usuario.EsAdmin;
             this.lvwUbicaciones.FullRowSelect = true;
 
             AgregarTodasLasPosiciones();
-        }
-
-        private void AgregarUbicacion(string id, string ubicacion, string saldo, bool ocupada)
-        {
-            String[] fila = { id, ubicacion, saldo };
-            ListViewItem item = new ListViewItem(fila);
-            item.BackColor = Color.Lime;
-            if (ocupada)
-                item.BackColor = Color.Crimson;
-
-
-            this.lvwUbicaciones.Items.Add(item);
+            this.lvwListadoPocoStock.Visible = AgregarAlimentosConBajoStock();
         }
 
         public void AgregarTodasLasPosiciones()
         {
+            lvwUbicaciones.Items.Clear();
+            ListViewItem filaLista = null;
             foreach (KeyValuePair<int, Posicion> item in Sistema.listaPosiciones)
             {
-                item.Value.Ocupada = false;
+                filaLista = LogicaForms.AgregarFilaAListView(lvwUbicaciones, item.Key.ToString(), item.Value.Lugar.ToString(), item.Value.Saldo.ToString());
+                filaLista.BackColor = Color.Lime;
                 if (item.Value.Saldo > 0)
-                {
-                    item.Value.Ocupada = true;
-                }
-                AgregarUbicacion(item.Key.ToString(), item.Value.Lugar.ToString(), item.Value.Saldo.ToString(), item.Value.Ocupada);
+                    filaLista.BackColor = Color.MediumTurquoise;
             }
+        }
+
+        public bool AgregarAlimentosConBajoStock()
+        {
+            lvwListadoPocoStock.Items.Clear();
+            bool hayBajoStock = false;
+            ListViewItem filaLista = null;
+            foreach (Alimento item in Sistema.listaAlimentos.Values)
+            {
+                if (item.Stock <= 10)
+                {
+                    hayBajoStock = true;
+                    filaLista = LogicaForms.AgregarFilaAListView(lvwListadoPocoStock, item.NombreCompleto, item.Stock.ToString());
+                    filaLista.BackColor = Color.Gold;
+                    if (item.Stock < 5)
+                        filaLista.BackColor = Color.Coral;
+                    if (item.Stock == 0)
+                        filaLista.BackColor = Color.Crimson;
+                }
+            }
+            return hayBajoStock;
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -84,8 +96,9 @@ namespace Bar
 
         private void MenuPrincipal_Activated(object sender, EventArgs e)
         {
-            lvwUbicaciones.Items.Clear();
             AgregarTodasLasPosiciones();
+            this.lvwListadoPocoStock.Visible = AgregarAlimentosConBajoStock();
+            this.txtBuscarMesa.Text = String.Empty;
         }
 
         private void btbDesloguear_Click(object sender, EventArgs e)
@@ -97,6 +110,41 @@ namespace Bar
                 this.DialogResult = DialogResult.Yes;
                 this.Close();
             }
+        }
+
+        private void txtBuscarMesa_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsLetter(e.KeyChar) || char.IsPunctuation(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void btnIrAMesa_Click(object sender, EventArgs e)
+        {
+            if (Sistema.ExisteMesa(this.txtBuscarMesa.Text, out int mesa))
+            {
+                CargaDePedido menuPedido = new CargaDePedido(mesa, Sistema.listaPosiciones[mesa]);
+                menuPedido.ShowDialog();
+            }
+            else 
+            {
+                MessageBox.Show("No existe la mesa.");
+            }
+            
+
+        }
+
+        private void lvwListadoPocoStock_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e)
+        {
+            e.Cancel = true;
+            e.NewWidth = lvwListadoPocoStock.Columns[e.ColumnIndex].Width;
+        }
+
+        private void btnAdmin_Click(object sender, EventArgs e)
+        {
+            MenuAdministracion menuAdmin = new MenuAdministracion();
+            menuAdmin.ShowDialog();
         }
     }
 }

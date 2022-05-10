@@ -56,7 +56,7 @@ namespace Bar
             // 
             this.lblSaldo.AutoSize = true;
             this.lblSaldo.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblSaldo.Location = new System.Drawing.Point(222, 433);
+            this.lblSaldo.Location = new System.Drawing.Point(208, 291);
             this.lblSaldo.Name = "lblSaldo";
             this.lblSaldo.Size = new System.Drawing.Size(100, 32);
             this.lblSaldo.TabIndex = 1;
@@ -72,7 +72,7 @@ namespace Bar
             this.lvwListaAlimentos.HideSelection = false;
             this.lvwListaAlimentos.Location = new System.Drawing.Point(101, 12);
             this.lvwListaAlimentos.Name = "lvwListaAlimentos";
-            this.lvwListaAlimentos.Size = new System.Drawing.Size(332, 418);
+            this.lvwListaAlimentos.Size = new System.Drawing.Size(332, 262);
             this.lvwListaAlimentos.TabIndex = 3;
             this.lvwListaAlimentos.UseCompatibleStateImageBehavior = false;
             this.lvwListaAlimentos.View = System.Windows.Forms.View.Details;
@@ -81,24 +81,27 @@ namespace Bar
             // columnHeader1
             // 
             this.columnHeader1.Text = "ID";
+            this.columnHeader1.Width = 25;
             // 
             // columnHeader2
             // 
             this.columnHeader2.Text = "Comida";
+            this.columnHeader2.Width = 150;
             // 
             // columnHeader3
             // 
             this.columnHeader3.Text = "Precio";
+            this.columnHeader3.Width = 50;
             // 
             // columnHeader4
             // 
-            this.columnHeader4.Text = "SubTotal";
+            this.columnHeader4.Text = "Cantidad";
             // 
             // btnMenos
             // 
             this.btnMenos.Enabled = false;
             this.btnMenos.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnMenos.Location = new System.Drawing.Point(358, 475);
+            this.btnMenos.Location = new System.Drawing.Point(358, 280);
             this.btnMenos.Name = "btnMenos";
             this.btnMenos.Size = new System.Drawing.Size(75, 59);
             this.btnMenos.TabIndex = 4;
@@ -110,7 +113,7 @@ namespace Bar
             // 
             this.btnMas.Enabled = false;
             this.btnMas.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnMas.Location = new System.Drawing.Point(101, 475);
+            this.btnMas.Location = new System.Drawing.Point(101, 280);
             this.btnMas.Name = "btnMas";
             this.btnMas.Size = new System.Drawing.Size(75, 59);
             this.btnMas.TabIndex = 5;
@@ -120,9 +123,9 @@ namespace Bar
             // 
             // btnCerrarMesa
             // 
-            this.btnCerrarMesa.Location = new System.Drawing.Point(303, 540);
+            this.btnCerrarMesa.Location = new System.Drawing.Point(347, 345);
             this.btnCerrarMesa.Name = "btnCerrarMesa";
-            this.btnCerrarMesa.Size = new System.Drawing.Size(130, 51);
+            this.btnCerrarMesa.Size = new System.Drawing.Size(86, 51);
             this.btnCerrarMesa.TabIndex = 6;
             this.btnCerrarMesa.Text = "Cerrar Mesa";
             this.btnCerrarMesa.UseVisualStyleBackColor = true;
@@ -130,9 +133,9 @@ namespace Bar
             // 
             // btbConfirmarPedido
             // 
-            this.btbConfirmarPedido.Location = new System.Drawing.Point(101, 540);
+            this.btbConfirmarPedido.Location = new System.Drawing.Point(222, 345);
             this.btbConfirmarPedido.Name = "btbConfirmarPedido";
-            this.btbConfirmarPedido.Size = new System.Drawing.Size(117, 51);
+            this.btbConfirmarPedido.Size = new System.Drawing.Size(86, 51);
             this.btbConfirmarPedido.TabIndex = 7;
             this.btbConfirmarPedido.Text = "Confirmar Pedido";
             this.btbConfirmarPedido.UseVisualStyleBackColor = true;
@@ -140,9 +143,9 @@ namespace Bar
             // 
             // btbCancelar
             // 
-            this.btbCancelar.Location = new System.Drawing.Point(439, 12);
+            this.btbCancelar.Location = new System.Drawing.Point(101, 345);
             this.btbCancelar.Name = "btbCancelar";
-            this.btbCancelar.Size = new System.Drawing.Size(86, 86);
+            this.btbCancelar.Size = new System.Drawing.Size(86, 51);
             this.btbCancelar.TabIndex = 8;
             this.btbCancelar.Text = "Cancelar";
             this.btbCancelar.UseVisualStyleBackColor = true;
@@ -152,7 +155,7 @@ namespace Bar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(537, 603);
+            this.ClientSize = new System.Drawing.Size(511, 418);
             this.ControlBox = false;
             this.Controls.Add(this.btbCancelar);
             this.Controls.Add(this.btbConfirmarPedido);

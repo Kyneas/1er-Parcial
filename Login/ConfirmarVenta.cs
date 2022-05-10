@@ -43,19 +43,11 @@ namespace Bar
             }
         }
 
-        private void AgregarUnaComidaPedidaAListView(string cantidad, string alimento, string precio)
-        {
-            String[] fila = { cantidad, alimento, precio};
-            ListViewItem item = new ListViewItem(fila);
-
-            this.lvwAlimentosPedidos.Items.Add(item);
-        }
-
         private void AgregarTodasLasComidasPedidasAListView()
         {
             foreach (Alimento item in comidaPedida)
             {
-                AgregarUnaComidaPedidaAListView(item.Cantidad.ToString(), item.Nombre.ToString(), item.Precio.ToString());
+                LogicaForms.AgregarFilaAListView(lvwAlimentosPedidos, item.Cantidad.ToString(), item.NombreCompleto, item.Cantidad.ToString());
             }
         }
 

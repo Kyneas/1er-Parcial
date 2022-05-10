@@ -43,7 +43,7 @@ namespace Bar
             // chbPagaCredito
             // 
             this.chbPagaCredito.AutoSize = true;
-            this.chbPagaCredito.Location = new System.Drawing.Point(206, 12);
+            this.chbPagaCredito.Location = new System.Drawing.Point(313, 12);
             this.chbPagaCredito.Name = "chbPagaCredito";
             this.chbPagaCredito.Size = new System.Drawing.Size(115, 19);
             this.chbPagaCredito.TabIndex = 0;
@@ -53,7 +53,7 @@ namespace Bar
             // chbUsaEstacionamiento
             // 
             this.chbUsaEstacionamiento.AutoSize = true;
-            this.chbUsaEstacionamiento.Location = new System.Drawing.Point(206, 37);
+            this.chbUsaEstacionamiento.Location = new System.Drawing.Point(313, 37);
             this.chbUsaEstacionamiento.Name = "chbUsaEstacionamiento";
             this.chbUsaEstacionamiento.Size = new System.Drawing.Size(136, 19);
             this.chbUsaEstacionamiento.TabIndex = 1;
@@ -63,7 +63,7 @@ namespace Bar
             // lblSaldoParaCerrar
             // 
             this.lblSaldoParaCerrar.AutoSize = true;
-            this.lblSaldoParaCerrar.Location = new System.Drawing.Point(206, 200);
+            this.lblSaldoParaCerrar.Location = new System.Drawing.Point(313, 200);
             this.lblSaldoParaCerrar.Name = "lblSaldoParaCerrar";
             this.lblSaldoParaCerrar.Size = new System.Drawing.Size(43, 15);
             this.lblSaldoParaCerrar.TabIndex = 3;
@@ -98,7 +98,7 @@ namespace Bar
             this.lvwAlimentosPedidos.HideSelection = false;
             this.lvwAlimentosPedidos.Location = new System.Drawing.Point(12, 12);
             this.lvwAlimentosPedidos.Name = "lvwAlimentosPedidos";
-            this.lvwAlimentosPedidos.Size = new System.Drawing.Size(188, 203);
+            this.lvwAlimentosPedidos.Size = new System.Drawing.Size(247, 203);
             this.lvwAlimentosPedidos.TabIndex = 6;
             this.lvwAlimentosPedidos.UseCompatibleStateImageBehavior = false;
             this.lvwAlimentosPedidos.View = System.Windows.Forms.View.Details;
@@ -106,27 +106,31 @@ namespace Bar
             // columnHeader1
             // 
             this.columnHeader1.Text = "#";
+            this.columnHeader1.Width = 25;
             // 
             // columnHeader2
             // 
             this.columnHeader2.Text = "Item";
+            this.columnHeader2.Width = 150;
             // 
             // columnHeader3
             // 
             this.columnHeader3.Text = "Precio";
             // 
-            // Venta
+            // ConfirmarVenta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(461, 312);
+            this.ControlBox = false;
             this.Controls.Add(this.lvwAlimentosPedidos);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnConfirmarCerrar);
             this.Controls.Add(this.lblSaldoParaCerrar);
             this.Controls.Add(this.chbUsaEstacionamiento);
             this.Controls.Add(this.chbPagaCredito);
-            this.Name = "Venta";
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Name = "ConfirmarVenta";
             this.Text = "Venta";
             this.Load += new System.EventHandler(this.Venta_Load);
             this.ResumeLayout(false);
