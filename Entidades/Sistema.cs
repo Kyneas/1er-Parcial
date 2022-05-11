@@ -31,7 +31,7 @@ namespace Entidades
             listaEmpleados.Add(12, new Persona("Matias", "Ferreira", "asd123", true));
             listaEmpleados.Add(34, new Persona("Roberto", "Gomez Bolaños", "gf457gfh4", false));
             listaEmpleados.Add(34576, new Persona("David", "Bisbal", "gf845htr764", true));
-            listaEmpleados.Add(45674, new Persona("Pedro", "El Escamoso", "gfgh56hfgf4", false));
+            listaEmpleados.Add(45674, new Persona("Pedro", "Perez", "gfgh56hfgf4", false));
         }
 
         private static void CargarPosicionesHardcodeadas()
