@@ -39,13 +39,18 @@ namespace Bar
             this.lblNombre = new System.Windows.Forms.Label();
             this.lblApellido = new System.Windows.Forms.Label();
             this.lblClave = new System.Windows.Forms.Label();
-            this.lvlPermisosAdministrador = new System.Windows.Forms.CheckBox();
+            this.chkEsAdministrador = new System.Windows.Forms.CheckBox();
             this.txtDNI = new System.Windows.Forms.TextBox();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.txtApellido = new System.Windows.Forms.TextBox();
             this.txtClave = new System.Windows.Forms.TextBox();
             this.btnEliminarUsuario = new System.Windows.Forms.Button();
             this.btnCrearUsuario = new System.Windows.Forms.Button();
+            this.lblErrorDni = new System.Windows.Forms.Label();
+            this.lblErrorNombre = new System.Windows.Forms.Label();
+            this.lblErrorApellido = new System.Windows.Forms.Label();
+            this.lblErrorClave = new System.Windows.Forms.Label();
+            this.lblSoloNumeros = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lvwListaUsuariosSistema
@@ -62,8 +67,8 @@ namespace Bar
             this.lvwListaUsuariosSistema.TabIndex = 0;
             this.lvwListaUsuariosSistema.UseCompatibleStateImageBehavior = false;
             this.lvwListaUsuariosSistema.View = System.Windows.Forms.View.Details;
-            this.lvwListaUsuariosSistema.SelectedIndexChanged += new System.EventHandler(this.lvwListaUsuariosSistema_SelectedIndexChanged);
             this.lvwListaUsuariosSistema.Click += new System.EventHandler(this.lvwListaUsuariosSistema_Click);
+            this.lvwListaUsuariosSistema.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lvwListaUsuariosSistema_MouseUp);
             // 
             // columnHeader1
             // 
@@ -133,15 +138,15 @@ namespace Bar
             this.lblClave.TabIndex = 6;
             this.lblClave.Text = "Clave:";
             // 
-            // lvlPermisosAdministrador
+            // chkEsAdministrador
             // 
-            this.lvlPermisosAdministrador.AutoSize = true;
-            this.lvlPermisosAdministrador.Location = new System.Drawing.Point(350, 221);
-            this.lvlPermisosAdministrador.Name = "lvlPermisosAdministrador";
-            this.lvlPermisosAdministrador.Size = new System.Drawing.Size(114, 19);
-            this.lvlPermisosAdministrador.TabIndex = 7;
-            this.lvlPermisosAdministrador.Text = "Es administrador";
-            this.lvlPermisosAdministrador.UseVisualStyleBackColor = true;
+            this.chkEsAdministrador.AutoSize = true;
+            this.chkEsAdministrador.Location = new System.Drawing.Point(350, 221);
+            this.chkEsAdministrador.Name = "chkEsAdministrador";
+            this.chkEsAdministrador.Size = new System.Drawing.Size(114, 19);
+            this.chkEsAdministrador.TabIndex = 7;
+            this.chkEsAdministrador.Text = "Es administrador";
+            this.chkEsAdministrador.UseVisualStyleBackColor = true;
             // 
             // txtDNI
             // 
@@ -149,6 +154,7 @@ namespace Bar
             this.txtDNI.Name = "txtDNI";
             this.txtDNI.Size = new System.Drawing.Size(100, 23);
             this.txtDNI.TabIndex = 8;
+            this.txtDNI.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDNI_KeyPress);
             // 
             // txtNombre
             // 
@@ -189,19 +195,75 @@ namespace Bar
             this.btnCrearUsuario.TabIndex = 13;
             this.btnCrearUsuario.Text = "Crear Usuario";
             this.btnCrearUsuario.UseVisualStyleBackColor = true;
+            this.btnCrearUsuario.Click += new System.EventHandler(this.btnCrearUsuario_Click);
+            // 
+            // lblErrorDni
+            // 
+            this.lblErrorDni.AutoSize = true;
+            this.lblErrorDni.Location = new System.Drawing.Point(533, 53);
+            this.lblErrorDni.Name = "lblErrorDni";
+            this.lblErrorDni.Size = new System.Drawing.Size(0, 15);
+            this.lblErrorDni.TabIndex = 14;
+            this.lblErrorDni.Visible = false;
+            // 
+            // lblErrorNombre
+            // 
+            this.lblErrorNombre.AutoSize = true;
+            this.lblErrorNombre.Location = new System.Drawing.Point(534, 100);
+            this.lblErrorNombre.Name = "lblErrorNombre";
+            this.lblErrorNombre.Size = new System.Drawing.Size(79, 15);
+            this.lblErrorNombre.TabIndex = 15;
+            this.lblErrorNombre.Text = "Error Nombre";
+            this.lblErrorNombre.Visible = false;
+            // 
+            // lblErrorApellido
+            // 
+            this.lblErrorApellido.AutoSize = true;
+            this.lblErrorApellido.Location = new System.Drawing.Point(534, 139);
+            this.lblErrorApellido.Name = "lblErrorApellido";
+            this.lblErrorApellido.Size = new System.Drawing.Size(79, 15);
+            this.lblErrorApellido.TabIndex = 16;
+            this.lblErrorApellido.Text = "Error Apellido";
+            this.lblErrorApellido.Visible = false;
+            // 
+            // lblErrorClave
+            // 
+            this.lblErrorClave.AutoSize = true;
+            this.lblErrorClave.Location = new System.Drawing.Point(534, 177);
+            this.lblErrorClave.Name = "lblErrorClave";
+            this.lblErrorClave.Size = new System.Drawing.Size(64, 15);
+            this.lblErrorClave.TabIndex = 17;
+            this.lblErrorClave.Text = "Error Clave";
+            this.lblErrorClave.Visible = false;
+            // 
+            // lblSoloNumeros
+            // 
+            this.lblSoloNumeros.AutoSize = true;
+            this.lblSoloNumeros.ForeColor = System.Drawing.Color.Red;
+            this.lblSoloNumeros.Location = new System.Drawing.Point(438, 76);
+            this.lblSoloNumeros.Name = "lblSoloNumeros";
+            this.lblSoloNumeros.Size = new System.Drawing.Size(80, 15);
+            this.lblSoloNumeros.TabIndex = 18;
+            this.lblSoloNumeros.Text = "Solo numeros";
+            this.lblSoloNumeros.Visible = false;
             // 
             // AdministrarUsuarios
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(615, 379);
+            this.Controls.Add(this.lblSoloNumeros);
+            this.Controls.Add(this.lblErrorClave);
+            this.Controls.Add(this.lblErrorApellido);
+            this.Controls.Add(this.lblErrorNombre);
+            this.Controls.Add(this.lblErrorDni);
             this.Controls.Add(this.btnCrearUsuario);
             this.Controls.Add(this.btnEliminarUsuario);
             this.Controls.Add(this.txtClave);
             this.Controls.Add(this.txtApellido);
             this.Controls.Add(this.txtNombre);
             this.Controls.Add(this.txtDNI);
-            this.Controls.Add(this.lvlPermisosAdministrador);
+            this.Controls.Add(this.chkEsAdministrador);
             this.Controls.Add(this.lblClave);
             this.Controls.Add(this.lblApellido);
             this.Controls.Add(this.lblNombre);
@@ -228,7 +290,7 @@ namespace Bar
         private System.Windows.Forms.Label lblNombre;
         private System.Windows.Forms.Label lblApellido;
         private System.Windows.Forms.Label lblClave;
-        private System.Windows.Forms.CheckBox lvlPermisosAdministrador;
+        private System.Windows.Forms.CheckBox chkEsAdministrador;
         private System.Windows.Forms.TextBox txtDNI;
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.TextBox txtApellido;
@@ -236,5 +298,10 @@ namespace Bar
         private System.Windows.Forms.Button btnEliminarUsuario;
         private System.Windows.Forms.Button btnCrearUsuario;
         private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.Label lblErrorDni;
+        private System.Windows.Forms.Label lblErrorNombre;
+        private System.Windows.Forms.Label lblErrorApellido;
+        private System.Windows.Forms.Label lblErrorClave;
+        private System.Windows.Forms.Label lblSoloNumeros;
     }
 }

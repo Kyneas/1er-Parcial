@@ -31,7 +31,6 @@ namespace Bar
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MenuPrincipal));
             this.lblBienvenida = new System.Windows.Forms.Label();
-            this.lblEsAdmn = new System.Windows.Forms.Label();
             this.btnSalir = new System.Windows.Forms.Button();
             this.lvwUbicaciones = new System.Windows.Forms.ListView();
             this.lblCuadroUbicaciones_ID = new System.Windows.Forms.ColumnHeader();
@@ -44,31 +43,28 @@ namespace Bar
             this.txtBuscarMesa = new System.Windows.Forms.TextBox();
             this.btnIrAMesa = new System.Windows.Forms.Button();
             this.btnAdmin = new System.Windows.Forms.Button();
+            this.picTest = new System.Windows.Forms.PictureBox();
+            this.lblEsAdmn = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.picTest)).BeginInit();
             this.SuspendLayout();
             // 
             // lblBienvenida
             // 
             this.lblBienvenida.AutoSize = true;
-            this.lblBienvenida.Location = new System.Drawing.Point(12, 9);
+            this.lblBienvenida.Location = new System.Drawing.Point(253, 581);
             this.lblBienvenida.Name = "lblBienvenida";
             this.lblBienvenida.Size = new System.Drawing.Size(38, 15);
             this.lblBienvenida.TabIndex = 0;
             this.lblBienvenida.Text = "label1";
             // 
-            // lblEsAdmn
-            // 
-            this.lblEsAdmn.AutoSize = true;
-            this.lblEsAdmn.Font = new System.Drawing.Font("Segoe UI Symbol", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblEsAdmn.Location = new System.Drawing.Point(12, 647);
-            this.lblEsAdmn.Name = "lblEsAdmn";
-            this.lblEsAdmn.Size = new System.Drawing.Size(110, 25);
-            this.lblEsAdmn.TabIndex = 1;
-            this.lblEsAdmn.Text = "Sos Admin";
-            // 
             // btnSalir
             // 
+            this.btnSalir.FlatAppearance.BorderSize = 0;
+            this.btnSalir.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnSalir.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSalir.Image = ((System.Drawing.Image)(resources.GetObject("btnSalir.Image")));
-            this.btnSalir.Location = new System.Drawing.Point(414, 627);
+            this.btnSalir.Location = new System.Drawing.Point(385, 12);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(42, 42);
             this.btnSalir.TabIndex = 2;
@@ -83,11 +79,11 @@ namespace Bar
             this.lblCuadroUbicaciones_ID,
             this.lblCuadroUbicaciones_Ubicacion,
             this.lblCuadroUbicaciones_Saldo});
-            this.lvwUbicaciones.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lvwUbicaciones.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lvwUbicaciones.HideSelection = false;
-            this.lvwUbicaciones.Location = new System.Drawing.Point(99, 75);
+            this.lvwUbicaciones.Location = new System.Drawing.Point(12, 41);
             this.lvwUbicaciones.Name = "lvwUbicaciones";
-            this.lvwUbicaciones.Size = new System.Drawing.Size(219, 522);
+            this.lvwUbicaciones.Size = new System.Drawing.Size(195, 553);
             this.lvwUbicaciones.TabIndex = 3;
             this.lvwUbicaciones.UseCompatibleStateImageBehavior = false;
             this.lvwUbicaciones.View = System.Windows.Forms.View.Details;
@@ -97,7 +93,7 @@ namespace Bar
             // lblCuadroUbicaciones_ID
             // 
             this.lblCuadroUbicaciones_ID.Text = "#";
-            this.lblCuadroUbicaciones_ID.Width = 25;
+            this.lblCuadroUbicaciones_ID.Width = 35;
             // 
             // lblCuadroUbicaciones_Ubicacion
             // 
@@ -107,12 +103,15 @@ namespace Bar
             // lblCuadroUbicaciones_Saldo
             // 
             this.lblCuadroUbicaciones_Saldo.Text = "$";
-            this.lblCuadroUbicaciones_Saldo.Width = 94;
             // 
             // btbDesloguear
             // 
+            this.btbDesloguear.FlatAppearance.BorderSize = 0;
+            this.btbDesloguear.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btbDesloguear.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btbDesloguear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btbDesloguear.Image = ((System.Drawing.Image)(resources.GetObject("btbDesloguear.Image")));
-            this.btbDesloguear.Location = new System.Drawing.Point(366, 627);
+            this.btbDesloguear.Location = new System.Drawing.Point(337, 12);
             this.btbDesloguear.Name = "btbDesloguear";
             this.btbDesloguear.Size = new System.Drawing.Size(42, 42);
             this.btbDesloguear.TabIndex = 4;
@@ -125,7 +124,7 @@ namespace Bar
             this.columnHeader1,
             this.columnHeader2});
             this.lvwListadoPocoStock.HideSelection = false;
-            this.lvwListadoPocoStock.Location = new System.Drawing.Point(385, 75);
+            this.lvwListadoPocoStock.Location = new System.Drawing.Point(243, 79);
             this.lvwListadoPocoStock.Name = "lvwListadoPocoStock";
             this.lvwListadoPocoStock.Size = new System.Drawing.Size(232, 405);
             this.lvwListadoPocoStock.TabIndex = 5;
@@ -144,7 +143,7 @@ namespace Bar
             // 
             // txtBuscarMesa
             // 
-            this.txtBuscarMesa.Location = new System.Drawing.Point(99, 42);
+            this.txtBuscarMesa.Location = new System.Drawing.Point(12, 12);
             this.txtBuscarMesa.Name = "txtBuscarMesa";
             this.txtBuscarMesa.PlaceholderText = "Buscar mesa...";
             this.txtBuscarMesa.Size = new System.Drawing.Size(100, 23);
@@ -153,7 +152,7 @@ namespace Bar
             // 
             // btnIrAMesa
             // 
-            this.btnIrAMesa.Location = new System.Drawing.Point(206, 42);
+            this.btnIrAMesa.Location = new System.Drawing.Point(118, 12);
             this.btnIrAMesa.Name = "btnIrAMesa";
             this.btnIrAMesa.Size = new System.Drawing.Size(31, 23);
             this.btnIrAMesa.TabIndex = 7;
@@ -163,7 +162,7 @@ namespace Bar
             // 
             // btnAdmin
             // 
-            this.btnAdmin.Location = new System.Drawing.Point(234, 627);
+            this.btnAdmin.Location = new System.Drawing.Point(232, 12);
             this.btnAdmin.Name = "btnAdmin";
             this.btnAdmin.Size = new System.Drawing.Size(99, 42);
             this.btnAdmin.TabIndex = 8;
@@ -171,13 +170,34 @@ namespace Bar
             this.btnAdmin.UseVisualStyleBackColor = true;
             this.btnAdmin.Click += new System.EventHandler(this.btnAdmin_Click);
             // 
+            // picTest
+            // 
+            this.picTest.Image = ((System.Drawing.Image)(resources.GetObject("picTest.Image")));
+            this.picTest.Location = new System.Drawing.Point(232, 79);
+            this.picTest.Name = "picTest";
+            this.picTest.Size = new System.Drawing.Size(286, 385);
+            this.picTest.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picTest.TabIndex = 9;
+            this.picTest.TabStop = false;
+            // 
+            // lblEsAdmn
+            // 
+            this.lblEsAdmn.AutoSize = true;
+            this.lblEsAdmn.Font = new System.Drawing.Font("Segoe UI Symbol", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblEsAdmn.Location = new System.Drawing.Point(350, 581);
+            this.lblEsAdmn.Name = "lblEsAdmn";
+            this.lblEsAdmn.Size = new System.Drawing.Size(110, 25);
+            this.lblEsAdmn.TabIndex = 1;
+            this.lblEsAdmn.Text = "Sos Admin";
+            // 
             // MenuPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Wheat;
-            this.ClientSize = new System.Drawing.Size(665, 681);
+            this.ClientSize = new System.Drawing.Size(551, 617);
             this.ControlBox = false;
+            this.Controls.Add(this.picTest);
             this.Controls.Add(this.btnAdmin);
             this.Controls.Add(this.btnIrAMesa);
             this.Controls.Add(this.txtBuscarMesa);
@@ -193,6 +213,7 @@ namespace Bar
             this.Text = "MenuPrincipal";
             this.Activated += new System.EventHandler(this.MenuPrincipal_Activated);
             this.Load += new System.EventHandler(this.MenuPrincipal_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.picTest)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -201,7 +222,6 @@ namespace Bar
         #endregion
 
         private System.Windows.Forms.Label lblBienvenida;
-        private System.Windows.Forms.Label lblEsAdmn;
         private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.ListView lvwUbicaciones;
         private System.Windows.Forms.ColumnHeader lblCuadroUbicaciones_ID;
@@ -214,5 +234,7 @@ namespace Bar
         private System.Windows.Forms.TextBox txtBuscarMesa;
         private System.Windows.Forms.Button btnIrAMesa;
         private System.Windows.Forms.Button btnAdmin;
+        private System.Windows.Forms.PictureBox picTest;
+        private System.Windows.Forms.Label lblEsAdmn;
     }
 }

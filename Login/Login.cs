@@ -15,7 +15,7 @@ namespace Bar
         {
             lblSoloNumeros.Visible = false;
             lblNoDni.Visible = false;
-            if (char.IsLetter(e.KeyChar))
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '\b')
             {
                 e.Handled = true;
                 lblSoloNumeros.Visible = true;
@@ -71,8 +71,8 @@ namespace Bar
 
         private void btnLoguearNoAdmin_Click(object sender, EventArgs e)
         {
-            txtDni.Text = "34";
-            txtClave.Text = "gf4";
+            txtDni.Text = "14";
+            txtClave.Text = "gf457gfh4";
         }
 
         private void Login_Load(object sender, EventArgs e)

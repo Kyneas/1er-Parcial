@@ -53,6 +53,7 @@ namespace Bar
             this.btnAgregarAlimento.TabIndex = 1;
             this.btnAgregarAlimento.Text = "Insumos";
             this.btnAgregarAlimento.UseVisualStyleBackColor = true;
+            this.btnAgregarAlimento.Click += new System.EventHandler(this.btnAgregarAlimento_Click);
             // 
             // btnVentas
             // 

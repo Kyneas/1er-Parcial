@@ -16,6 +16,7 @@ namespace Bar
     {
         Persona usuario;
         bool admin;
+        bool hayBajoStock;
         private MenuPrincipal()
         {
             InitializeComponent();
@@ -34,7 +35,9 @@ namespace Bar
             this.lvwUbicaciones.FullRowSelect = true;
 
             AgregarTodasLasPosiciones();
-            this.lvwListadoPocoStock.Visible = AgregarAlimentosConBajoStock();
+            hayBajoStock = AgregarAlimentosConBajoStock();
+            this.lvwListadoPocoStock.Visible = hayBajoStock;
+            this.picTest.Visible = !hayBajoStock;
         }
 
         public void AgregarTodasLasPosiciones()
@@ -44,9 +47,9 @@ namespace Bar
             foreach (KeyValuePair<int, Posicion> item in Sistema.listaPosiciones)
             {
                 filaLista = LogicaForms.AgregarFilaAListView(lvwUbicaciones, item.Key.ToString(), item.Value.Lugar.ToString(), item.Value.Saldo.ToString());
-                filaLista.BackColor = Color.Lime;
+                filaLista.BackColor = Color.PaleGreen;
                 if (item.Value.Saldo > 0)
-                    filaLista.BackColor = Color.MediumTurquoise;
+                    filaLista.BackColor = Color.SkyBlue;
             }
         }
 
@@ -97,7 +100,9 @@ namespace Bar
         private void MenuPrincipal_Activated(object sender, EventArgs e)
         {
             AgregarTodasLasPosiciones();
-            this.lvwListadoPocoStock.Visible = AgregarAlimentosConBajoStock();
+            hayBajoStock = AgregarAlimentosConBajoStock();
+            this.lvwListadoPocoStock.Visible = hayBajoStock;
+            this.picTest.Visible = !hayBajoStock;
             this.txtBuscarMesa.Text = String.Empty;
         }
 

@@ -56,43 +56,5 @@ namespace Entidades
             }
             return false;
         }
-
-        public static bool ValidarNombreOApellido(string nombreOApellido)
-        {
-            if (string.IsNullOrWhiteSpace(nombreOApellido) || nombreOApellido.Length == 1)
-                return false;
-
-            foreach (char letra in nombreOApellido)
-            {
-                if (char.IsDigit(letra))
-                    return false;
-            }
-
-            return true;
-        }
-
-        public static bool ValidarClave(string clave) 
-        {
-            int contadorMinusculas = 0;
-            int contadorMayusculas = 0;
-            int contadorNumeros = 0;
-
-            if (string.IsNullOrWhiteSpace(clave) || clave.Length < 8)
-                return false;
-
-            foreach (char letra in clave)
-            {
-                if (char.IsLower(letra))
-                    contadorMinusculas++;
-                if (char.IsUpper(letra))
-                    contadorMayusculas++;
-                if (char.IsNumber(letra))
-                    contadorNumeros++;
-            }
-            if (contadorMayusculas >= 1 && contadorMinusculas >= 1 && contadorNumeros >= 1)
-                return true;
-
-            return false;
-        }
     }
 }

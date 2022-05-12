@@ -22,5 +22,11 @@ namespace Bar
             AdministrarUsuarios adminUsuarios = new AdministrarUsuarios();
             adminUsuarios.ShowDialog();
         }
+
+        private void btnAgregarAlimento_Click(object sender, EventArgs e)
+        {
+            AdministrarInsumos adminInsumos = new AdministrarInsumos();
+            adminInsumos.ShowDialog();
+        }
     }
 }

@@ -23,7 +23,6 @@ namespace Bar
         private void AdministrarUsuarios_Load(object sender, EventArgs e)
         {
             AgregarTodosLosUsuarios();
-            this.btnEliminarUsuario.Enabled = false;
         }
 
         public void AgregarTodosLosUsuarios() 
@@ -41,30 +40,98 @@ namespace Bar
 
         private void btnEliminarUsuario_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show($"Confirma que desea eliminar al usuario {Sistema.listaEmpleados[dniEmpleadoSeleccionado].NombreCompleto}",
-                "Confirmar borrar el usuario", MessageBoxButtons.YesNo)==DialogResult.Yes)
+            if (Sistema.HaySoloUnAdministrador() && Sistema.listaEmpleados[dniEmpleadoSeleccionado].EsAdmin)
             {
-                Sistema.listaEmpleados.Remove(dniEmpleadoSeleccionado);
-                AgregarTodosLosUsuarios();
+                MessageBox.Show("Error, no puede eliminar a todos los administradores");
             }
-            dniEmpleadoSeleccionado = 0;
-        }
-
-        private void lvwListaUsuariosSistema_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //string test = lvwListaUsuariosSistema.SelectedItems[0].Text;
-            //dniEmpleadoSeleccionado = int.Parse(lvwListaUsuariosSistema.SelectedItems[0].Text);
+            else 
+            {
+                if (MessageBox.Show($"Confirma que desea eliminar al usuario {Sistema.listaEmpleados[dniEmpleadoSeleccionado].NombreCompleto}?",
+                "Confirmar borrar el usuario", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    Sistema.listaEmpleados.Remove(dniEmpleadoSeleccionado);
+                    AgregarTodosLosUsuarios();
+                    this.btnEliminarUsuario.Enabled = false;
+                }
+            }
         }
 
         private void lvwListaUsuariosSistema_Click(object sender, EventArgs e)
         {
-            this.btnEliminarUsuario.Enabled = false;
-            if (lvwListaUsuariosSistema.SelectedItems[0] is not null && lvwListaUsuariosSistema.SelectedItems.Count != 0) 
+            if (lvwListaUsuariosSistema.SelectedItems.Count != 0)
             {
                 this.btnEliminarUsuario.Enabled = true;
                 dniEmpleadoSeleccionado = int.Parse(lvwListaUsuariosSistema.SelectedItems[0].Text);
             }
-            
+        }
+
+        private void lvwListaUsuariosSistema_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (lvwListaUsuariosSistema.SelectedItems.Count == 0)
+            {
+                this.btnEliminarUsuario.Enabled = false;
+            }
+        }
+
+        private void btnCrearUsuario_Click(object sender, EventArgs e)
+        {
+            string nombre = this.txtNombre.Text;
+            string apellido = this.txtApellido.Text;
+            string stringDni = this.txtDNI.Text;
+            int dni;
+            string clave = this.txtClave.Text;
+            bool esAdmin = this.chkEsAdministrador.Checked;
+            bool datosCorrectos = true;
+
+            this.lblErrorNombre.Visible = false;
+            this.lblErrorApellido.Visible = false;
+            this.lblErrorClave.Visible = false;
+            this.lblErrorDni.Visible = false;
+
+            if (!Sistema.EsNombreOApellidoValido(nombre))
+            {
+                datosCorrectos = false;
+                this.lblErrorNombre.Visible = true;
+            }
+            if (!Sistema.EsNombreOApellidoValido(apellido)) 
+            {
+                datosCorrectos = false;
+                this.lblErrorApellido.Visible = true;
+            }
+            if (!Sistema.EsClaveValida(clave)) 
+            {
+                datosCorrectos = false;
+                this.lblErrorClave.Visible = true;
+            }
+            if (!Sistema.EsDNIValido(stringDni, out dni))
+            {
+                datosCorrectos = false;
+                this.lblErrorDni.Visible = true;
+            }
+            else if (Sistema.listaEmpleados.ContainsKey(dni))
+            {
+                datosCorrectos = false;
+                MessageBox.Show("El DNI ya esta en el sistema");
+            }
+
+            if (datosCorrectos &&
+                Sistema.CrearNuevoUsuario(stringDni, nombre, apellido, clave, esAdmin)) 
+            {
+                MessageBox.Show("Usuario creado con exito");
+                AgregarTodosLosUsuarios();
+            }
+
+        }
+
+        private void txtDNI_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            lblSoloNumeros.Visible = false;
+            lblErrorDni.Visible = false;
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+                lblSoloNumeros.Visible = true;
+            }
         }
     }
 }

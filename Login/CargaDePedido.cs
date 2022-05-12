@@ -14,7 +14,7 @@ namespace Bar
     public partial class CargaDePedido : Form
     {
         int mesa;
-        Posicion lugar;
+        Posicion lugarCopia;
         Posicion lugarOriginal;
 
         public CargaDePedido()
@@ -26,19 +26,20 @@ namespace Bar
         {
             this.mesa = mesa;
             this.lugarOriginal = lugarOriginal;
-            this.lugar = new Posicion(lugarOriginal.Lugar);
-            this.lugar.ListaComidaPedida = new Dictionary<int, Alimento>();
-            foreach (KeyValuePair<int,Alimento> item in lugarOriginal.ListaComidaPedida)
+            this.lugarCopia = new Posicion(lugarOriginal.Lugar);
+            this.lugarCopia.ListaComidaPedida = new Dictionary<int, Alimento>();
+            //foreach (KeyValuePair<int,Alimento> item in lugarOriginal.ListaComidaPedida)
+            foreach (KeyValuePair<int,Alimento> item in Sistema.listaAlimentos)
             {
                 if (item.Value is Comida)
                 {
-                    this.lugar.ListaComidaPedida.Add(item.Key, new Comida(lugarOriginal.ListaComidaPedida[item.Key].Nombre,
+                    this.lugarCopia.ListaComidaPedida.Add(item.Key, new Comida(lugarOriginal.ListaComidaPedida[item.Key].Nombre,
                     lugarOriginal.ListaComidaPedida[item.Key].Precio, lugarOriginal.ListaComidaPedida[item.Key].Cantidad, Sistema.listaAlimentos[item.Key].Stock,
                     ((Comida)lugarOriginal.ListaComidaPedida[item.Key]).Vegano));
                 }
                 if (item.Value is Bebida)
                 {
-                    this.lugar.ListaComidaPedida.Add(item.Key, new Bebida(lugarOriginal.ListaComidaPedida[item.Key].Nombre,
+                    this.lugarCopia.ListaComidaPedida.Add(item.Key, new Bebida(lugarOriginal.ListaComidaPedida[item.Key].Nombre,
                     lugarOriginal.ListaComidaPedida[item.Key].Precio, lugarOriginal.ListaComidaPedida[item.Key].Cantidad, Sistema.listaAlimentos[item.Key].Stock,
                     ((Bebida)lugarOriginal.ListaComidaPedida[item.Key]).Presentacion));
                 }
@@ -47,7 +48,7 @@ namespace Bar
 
         private void CargaDePedido_Load(object sender, EventArgs e)
         {
-            lblSaldo.Text = $"Saldo: ${lugar.Saldo}";
+            lblSaldo.Text = $"Saldo: ${lugarCopia.Saldo}";
             lblNumeroMesa.Text = $"Mesa: {mesa}";
             this.lvwListaAlimentos.FullRowSelect = true;//Seleccionar toda la fila
             ValidarSiHaySaldoParaHabilitarBotones();
@@ -56,7 +57,7 @@ namespace Bar
 
         public void AgregarTodasLosAlimentos()
         {
-            foreach (KeyValuePair<int, Alimento> item in lugar.ListaComidaPedida)
+            foreach (KeyValuePair<int, Alimento> item in lugarCopia.ListaComidaPedida)
             {
                 LogicaForms.AgregarFilaAListView(lvwListaAlimentos, item.Key.ToString(), item.Value.NombreCompleto, item.Value.Precio.ToString(), item.Value.Cantidad.ToString());
             }
@@ -79,24 +80,24 @@ namespace Bar
                 int id = int.Parse(lvwListaAlimentos.SelectedItems[0].Text);
                 if (boton == btnMas)
                 {
-                    lugar.ListaComidaPedida[id].Cantidad++;
-                    lugar.ListaComidaPedida[id].Stock--;
+                    lugarCopia.ListaComidaPedida[id].Cantidad++;
+                    lugarCopia.ListaComidaPedida[id].Stock--;
                 }
                 else if (boton == btnMenos)
                 {
-                    lugar.ListaComidaPedida[id].Cantidad--;
-                    lugar.ListaComidaPedida[id].Stock++;
+                    lugarCopia.ListaComidaPedida[id].Cantidad--;
+                    lugarCopia.ListaComidaPedida[id].Stock++;
                 }
                 int itemSeleccionado = lvwListaAlimentos.SelectedIndices[0];
                 lvwListaAlimentos.Items.Clear();
                 AgregarTodasLosAlimentos();
                 lvwListaAlimentos.Items[itemSeleccionado].Selected = true;
-                lblSaldo.Text = $"Saldo: ${lugar.Saldo}";
-                if (lugar.ListaComidaPedida[id].Stock == 0 && boton == btnMas)
+                lblSaldo.Text = $"Saldo: ${lugarCopia.Saldo}";
+                if (lugarCopia.ListaComidaPedida[id].Stock == 0 && boton == btnMas)
                 {
                     boton.Enabled = false;
                 }
-                else if (lugar.ListaComidaPedida[id].Cantidad == 0 && boton == btnMenos)
+                else if (lugarCopia.ListaComidaPedida[id].Cantidad == 0 && boton == btnMenos)
                 {
                     boton.Enabled = false;
                 }
@@ -111,7 +112,7 @@ namespace Bar
         private void btnCerrar_Click(object sender, EventArgs e)//Boton CERRAR MESA
         {
             ActualizarStocksPorPedidoHecho();
-            ConfirmarVenta venta = new ConfirmarVenta(this.mesa, this.lugar);
+            ConfirmarVenta venta = new ConfirmarVenta(this.mesa, this.lugarCopia);
             if (venta.ShowDialog() == DialogResult.OK)
             {
                 this.Dispose();
@@ -125,12 +126,12 @@ namespace Bar
 
             int id= int.Parse(lvwListaAlimentos.SelectedItems[0].Text);
 
-            if (lugar.ListaComidaPedida[id].Stock == 0)
+            if (lugarCopia.ListaComidaPedida[id].Stock == 0)
             {
                 btnMas.Enabled = false;
             }
 
-            if (lugar.ListaComidaPedida[id].Cantidad == 0)
+            if (lugarCopia.ListaComidaPedida[id].Cantidad == 0)
             {
                 btnMenos.Enabled = false;
             }
@@ -145,7 +146,7 @@ namespace Bar
 
         private void ValidarSiHaySaldoParaHabilitarBotones()
         {
-            if (lugar.Saldo == 0)
+            if (lugarCopia.Saldo == 0)
             {
                 btnCerrarMesa.Enabled = false;
             }
@@ -159,9 +160,9 @@ namespace Bar
         {
             foreach (KeyValuePair<int, Alimento> item in Sistema.listaAlimentos)
             {
-                item.Value.Stock = lugar.ListaComidaPedida[item.Key].Stock;//Actualizo stock de lista de sistema
-                lugarOriginal.ListaComidaPedida[item.Key].Stock = lugar.ListaComidaPedida[item.Key].Stock;//Actualizo stock de lista de mesa original
-                lugarOriginal.ListaComidaPedida[item.Key].Cantidad = lugar.ListaComidaPedida[item.Key].Cantidad;
+                item.Value.Stock = lugarCopia.ListaComidaPedida[item.Key].Stock;//Actualizo stock de lista de sistema
+                lugarOriginal.ListaComidaPedida[item.Key].Stock = lugarCopia.ListaComidaPedida[item.Key].Stock;//Actualizo stock de lista de mesa original
+                lugarOriginal.ListaComidaPedida[item.Key].Cantidad = lugarCopia.ListaComidaPedida[item.Key].Cantidad;
                 lugarOriginal.Ocupada = true;
             }
         }
