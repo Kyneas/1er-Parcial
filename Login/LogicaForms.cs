@@ -36,5 +36,14 @@ namespace Bar
             return item;
         }
 
-    }
+        public static void CerrarFormulariosDelPanel(Panel panel) 
+        {
+            foreach (Form item in panel.Controls)
+            {
+                if (item is Form)
+                    item.Dispose();
+            }
+        }
+
+}
 }

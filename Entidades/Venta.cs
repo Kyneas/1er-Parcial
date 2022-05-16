@@ -37,6 +37,11 @@ namespace Entidades
             recargoEstacionamiento = 50;
         }
 
+        public DateTime FechaVenta 
+        {
+            get { return this.fechaVenta; }
+        }
+
         private string ListarConsumisiones()
         {
             StringBuilder sb = new StringBuilder();

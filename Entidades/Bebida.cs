@@ -10,7 +10,7 @@ namespace Entidades
     {
         public enum Tamanio
         {
-            Lata_330ml, Lata_473ml, Botella_710ml, Botella_975ml, Botella_1500ml
+            Lata_200ml, Lata_330ml, Lata_473ml, Lata_900ml, Botella_375ml, Botella_710ml, Botella_975ml, Botella_1500ml
         }
 
         Tamanio presentacion;

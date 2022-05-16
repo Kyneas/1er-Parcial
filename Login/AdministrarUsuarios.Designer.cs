@@ -271,6 +271,7 @@ namespace Bar
             this.Controls.Add(this.lblAgregarUsuario);
             this.Controls.Add(this.lblListaUsuarios);
             this.Controls.Add(this.lvwListaUsuariosSistema);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "AdministrarUsuarios";
             this.Text = "AdministrarUsuarios";
             this.Load += new System.EventHandler(this.AdministrarUsuarios_Load);

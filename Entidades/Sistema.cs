@@ -13,6 +13,7 @@ namespace Entidades
         public static Dictionary<int, Alimento> listaAlimentos;
         public static Dictionary<int, Venta> listaVentasEfectuadas;
         static int idAlimento;
+        static int idVenta;
 
         static Sistema()
         {
@@ -21,6 +22,7 @@ namespace Entidades
             listaAlimentos = new Dictionary<int, Alimento>();
             listaVentasEfectuadas = new Dictionary<int, Venta>();
             idAlimento = 0;
+            idVenta = 0;
             CargarUsuariosHardcodeados();
             CargarAlimentosHardcodeados();
             CargarPosicionesHardcodeadas();
@@ -39,30 +41,11 @@ namespace Entidades
             for (int i = 1; i <= 15; i++)
             {
                 listaPosiciones.Add(i, new Posicion(Posicion.Donde.Mesa));
-                LlenarMesaConListaAlimentos(listaPosiciones, i);
             }
             for (int i = 16; i <= 20; i++)
             {
                 listaPosiciones.Add(i, new Posicion(Posicion.Donde.Barra));
-                LlenarMesaConListaAlimentos(listaPosiciones, i);
             }
-
-        }
-
-        private static void LlenarMesaConListaAlimentos(Dictionary<int,Posicion> listaLugar, int posicion)
-        {
-            Dictionary<int, Alimento> listaNueva = new Dictionary<int, Alimento>();
-
-            foreach (KeyValuePair<int,Alimento> item in Sistema.listaAlimentos)
-            {
-                if (item.Value is Comida &&
-                    listaLugar[posicion].Lugar == Posicion.Donde.Mesa)
-                    listaNueva.Add(item.Key, new Comida(item.Value.Nombre, item.Value.Precio, item.Value.Cantidad, item.Value.Stock, ((Comida)item.Value).Vegano));
-                if (item.Value is Bebida)
-                    listaNueva.Add(item.Key, new Bebida(item.Value.Nombre, item.Value.Precio, item.Value.Cantidad, item.Value.Stock, ((Bebida)item.Value).Presentacion));
-            }
-
-            listaLugar[posicion].ListaComidaPedida = listaNueva;
         }
 
         private static void CargarAlimentosHardcodeados()
@@ -85,6 +68,19 @@ namespace Entidades
             }
             listaEmpleados.Add(dni, new Persona(nombre, apellido, clave, esAdmin));
             return true;
+        }
+
+        public static void AgregarVenta(Venta venta) 
+        {
+            listaVentasEfectuadas.Add(++idVenta, venta);
+        }
+
+        public static Alimento CrearAlimento(string nombre, string precioString, string stockString, bool esVegano) 
+        {
+            if (float.TryParse(precioString, out float precio) &&
+                int.TryParse(stockString, out int stock))
+                return new Comida(nombre, precio, 0, stock, esVegano);
+            return null;
         }
 
         public static bool HaySoloUnAdministrador() 
@@ -132,6 +128,20 @@ namespace Entidades
             return false;
         }
 
+        public static bool EsPrecioValido(string stringPrecio, out float precio) 
+        {
+            if (float.TryParse(stringPrecio, out precio) && precio > 0)
+                return true;
+            return false;
+        }
+
+        public static bool EsStockValido(string stringStock, out int stock) 
+        {
+            if (int.TryParse(stringStock, out stock) && stock >= 0)
+                return true;
+            return false;
+        }
+
         public static bool EsClaveValida(string clave)
         {
             int contadorMinusculas = 0;
@@ -174,6 +184,43 @@ namespace Entidades
             }
             mesaInt = 0;
             return false;
+        }
+
+        public static bool ElAlimentoYaEstaEnLaLista(Alimento alimento) 
+        {
+           if (alimento is Comida)
+            {
+                foreach (Alimento item in Sistema.listaAlimentos.Values)
+                {
+                    if (item is Comida && (Comida)item == (Comida)alimento)
+                        return true;
+                }
+            }
+
+            else
+            {
+                foreach (Alimento item in Sistema.listaAlimentos.Values)
+                {
+                    if (item is Bebida && (Bebida)item == (Bebida)alimento)
+                        return true;
+                }
+            }
+            return false;
+        }
+
+        //public static bool LaBebidaYaEstaEnLaLista(Bebida alimento)
+        //{
+        //    foreach (Alimento item in listaAlimentos.Values)
+        //    {
+        //        if (item is Bebida && (Bebida)item == alimento)
+        //            return true;
+        //    }
+        //    return false;
+        //}
+
+        public static void AgregarAlimento(Alimento alimento) 
+        {
+            listaAlimentos.Add(++idAlimento, alimento);
         }
 
         public static bool VerificarLogin(Persona usuario, string clave)

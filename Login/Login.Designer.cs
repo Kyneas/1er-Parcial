@@ -41,6 +41,7 @@ namespace Bar
             this.btnLoguearNoAdmin = new System.Windows.Forms.Button();
             this.lblNoDni = new System.Windows.Forms.Label();
             this.btbSalir = new System.Windows.Forms.Button();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.SuspendLayout();
             // 
             // lblDni
@@ -197,6 +198,7 @@ namespace Bar
         private System.Windows.Forms.Button btnLoguearNoAdmin;
         private System.Windows.Forms.Label lblNoDni;
         private System.Windows.Forms.Button btbSalir;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
 

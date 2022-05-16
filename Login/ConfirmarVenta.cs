@@ -62,8 +62,10 @@ namespace Bar
         private void btnConfirmarCerrar_Click(object sender, EventArgs e)
         {
             Venta ventaEfectuada = new Venta(this.idMesa, this.posicion.Saldo,this.comidaPedida,chbPagaCredito.Checked, chbUsaEstacionamiento.Checked);
+            Sistema.AgregarVenta(ventaEfectuada);
             MessageBox.Show(ventaEfectuada.ToString());
-            Sistema.listaPosiciones[this.idMesa].VaciarMesa();
+            //Sistema.listaPosiciones[this.idMesa].VaciarMesa();
+            Sistema.listaPosiciones[this.idMesa].ListaComidaPedida.Clear();
             this.DialogResult = DialogResult.OK;
             this.Dispose();
         }

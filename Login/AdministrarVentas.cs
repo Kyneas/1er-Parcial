@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Entidades;
 
 namespace Bar
 {
@@ -15,6 +16,20 @@ namespace Bar
         public AdministrarVentas()
         {
             InitializeComponent();
+        }
+
+        private void AdministrarVentas_Load(object sender, EventArgs e)
+        {
+            AgregarTodasLasVentas();
+        }
+
+        public void AgregarTodasLasVentas()
+        {
+            lvwListaVentas.Items.Clear();
+            foreach (KeyValuePair<int, Venta> item in Sistema.listaVentasEfectuadas)
+            {
+                LogicaForms.AgregarFilaAListView(lvwListaVentas, item.Key.ToString(), item.Value.FechaVenta.ToString());
+            }
         }
     }
 }

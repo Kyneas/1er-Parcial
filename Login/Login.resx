@@ -61,7 +61,7 @@
   <data name="btbSalir.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
-        JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAAAsOAAALDgFAvuFBAAACjUlE
+        JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAAAsNAAALDQHtB8AsAAACjUlE
         QVRYR9WX24tNURzHt8HQiBdJBlPKC8Y9cokMSV68+As8eODF5YGapqQkuZWnUSgpEk1KErk8K0oolzxI
         pEFMjWJy/3xO+0yOOXPOWnvPmWm+9WnO+p21f9/f7L3WXr+T5FATvEnx86BrWBUwIv0brGWwAxoKo/IK
         LWAc7IYlhVGA1sML+AqbDPSj0AI2g7meQouBSloETvwD52Aq9KfQAqbDRTDnY1gAZTUZboMTz8JEqKTQ
@@ -76,4 +76,7 @@
         AAAASUVORK5CYII=
 </value>
   </data>
+  <metadata name="backgroundWorker1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
 </root>

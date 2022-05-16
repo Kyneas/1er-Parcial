@@ -21,6 +21,7 @@ namespace Entidades
         {
             this.lugar = lugar;
             this.ocupada = false;
+            this.listaComidaPedida = new Dictionary<int, Alimento>();
         }
 
         public Dictionary<int, Alimento> ListaComidaPedida
