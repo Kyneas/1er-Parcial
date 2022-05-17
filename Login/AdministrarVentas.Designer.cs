@@ -36,6 +36,7 @@ namespace Bar
             this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader6 = new System.Windows.Forms.ColumnHeader();
+            this.btnGuardarEnTxt = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lvwListaVentas
@@ -51,7 +52,7 @@ namespace Bar
             this.lvwListaVentas.HideSelection = false;
             this.lvwListaVentas.Location = new System.Drawing.Point(12, 12);
             this.lvwListaVentas.Name = "lvwListaVentas";
-            this.lvwListaVentas.Size = new System.Drawing.Size(760, 516);
+            this.lvwListaVentas.Size = new System.Drawing.Size(760, 467);
             this.lvwListaVentas.TabIndex = 0;
             this.lvwListaVentas.UseCompatibleStateImageBehavior = false;
             this.lvwListaVentas.View = System.Windows.Forms.View.Details;
@@ -88,11 +89,22 @@ namespace Bar
             this.columnHeader6.Text = "Estacionamiento";
             this.columnHeader6.Width = 130;
             // 
+            // btnGuardarEnTxt
+            // 
+            this.btnGuardarEnTxt.Location = new System.Drawing.Point(613, 485);
+            this.btnGuardarEnTxt.Name = "btnGuardarEnTxt";
+            this.btnGuardarEnTxt.Size = new System.Drawing.Size(159, 43);
+            this.btnGuardarEnTxt.TabIndex = 1;
+            this.btnGuardarEnTxt.Text = "Guardar en TXT";
+            this.btnGuardarEnTxt.UseVisualStyleBackColor = true;
+            this.btnGuardarEnTxt.Click += new System.EventHandler(this.btnGuardarEnTxt_Click);
+            // 
             // AdministrarVentas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 540);
+            this.Controls.Add(this.btnGuardarEnTxt);
             this.Controls.Add(this.lvwListaVentas);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "AdministrarVentas";
@@ -111,5 +123,6 @@ namespace Bar
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.ColumnHeader columnHeader6;
+        private System.Windows.Forms.Button btnGuardarEnTxt;
     }
 }

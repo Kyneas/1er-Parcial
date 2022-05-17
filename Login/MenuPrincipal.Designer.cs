@@ -140,6 +140,7 @@ namespace Bar
             this.btnAdmin.TabIndex = 8;
             this.btnAdmin.Text = "Administracion";
             this.btnAdmin.UseVisualStyleBackColor = true;
+            this.btnAdmin.Visible = false;
             this.btnAdmin.Click += new System.EventHandler(this.btnAdmin_Click);
             // 
             // pnlPrincipal
@@ -154,7 +155,7 @@ namespace Bar
             // 
             // pnlAdminArriba
             // 
-            this.pnlAdminArriba.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.pnlAdminArriba.BackColor = System.Drawing.Color.DarkRed;
             this.pnlAdminArriba.Location = new System.Drawing.Point(-2, 0);
             this.pnlAdminArriba.Name = "pnlAdminArriba";
             this.pnlAdminArriba.Size = new System.Drawing.Size(1078, 10);

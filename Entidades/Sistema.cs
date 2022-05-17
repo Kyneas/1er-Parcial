@@ -36,7 +36,7 @@ namespace Entidades
         {
             Dictionary<int, Alimento> copiaDeDiccionario = new Dictionary<int, Alimento>();
 
-            foreach (KeyValuePair<int, Alimento> item in diccionarioOrigen)//HAGO COPIA DE LISTA COMIDAS DE SISTEMA
+            foreach (KeyValuePair<int, Alimento> item in diccionarioOrigen)
             {
                 if (item.Value is Comida)
                 {

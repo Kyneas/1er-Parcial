@@ -40,6 +40,7 @@ namespace Bar
             AgregarTodasLasPosiciones();
             LogicaForms.CambiarColores(this);
             this.pnlAdminArriba.Visible = usuario.EsAdmin;
+            this.btnAdmin.Visible = usuario.EsAdmin;
 
         }
         /// <summary>

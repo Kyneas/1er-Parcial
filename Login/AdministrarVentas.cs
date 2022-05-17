@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Entidades;
+using System.IO;
 
 namespace Bar
 {
@@ -43,6 +44,18 @@ namespace Bar
         {
             e.Cancel = true;
             e.NewWidth = lvwListaVentas.Columns[e.ColumnIndex].Width;
+        }
+
+        private void btnGuardarEnTxt_Click(object sender, EventArgs e)
+        {
+            using (TextWriter tw = new StreamWriter("../../../Ventas.txt"))
+            {
+                foreach (KeyValuePair<int, Venta> venta in Sistema.listaVentasEfectuadas) 
+                {
+                    tw.WriteLine($"Venta #{venta.Key}");
+                    tw.WriteLine(venta.Value.ToString());
+                }
+            }
         }
     }
 }
