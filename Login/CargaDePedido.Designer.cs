@@ -52,17 +52,17 @@ namespace Bar
             // 
             this.lblNumeroMesa.AutoSize = true;
             this.lblNumeroMesa.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblNumeroMesa.Location = new System.Drawing.Point(450, 327);
+            this.lblNumeroMesa.Location = new System.Drawing.Point(26, 48);
             this.lblNumeroMesa.Name = "lblNumeroMesa";
-            this.lblNumeroMesa.Size = new System.Drawing.Size(78, 32);
+            this.lblNumeroMesa.Size = new System.Drawing.Size(106, 32);
             this.lblNumeroMesa.TabIndex = 0;
-            this.lblNumeroMesa.Text = "label1";
+            this.lblNumeroMesa.Text = "Mesa ##";
             // 
             // lblSaldo
             // 
             this.lblSaldo.AutoSize = true;
             this.lblSaldo.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblSaldo.Location = new System.Drawing.Point(602, 327);
+            this.lblSaldo.Location = new System.Drawing.Point(496, 534);
             this.lblSaldo.Name = "lblSaldo";
             this.lblSaldo.Size = new System.Drawing.Size(100, 32);
             this.lblSaldo.TabIndex = 1;
@@ -77,24 +77,26 @@ namespace Bar
             this.columnHeader4});
             this.lvwListaAlimentos.FullRowSelect = true;
             this.lvwListaAlimentos.HideSelection = false;
-            this.lvwListaAlimentos.Location = new System.Drawing.Point(12, 12);
+            this.lvwListaAlimentos.Location = new System.Drawing.Point(26, 142);
             this.lvwListaAlimentos.Name = "lvwListaAlimentos";
-            this.lvwListaAlimentos.Size = new System.Drawing.Size(302, 262);
+            this.lvwListaAlimentos.Size = new System.Drawing.Size(354, 312);
             this.lvwListaAlimentos.TabIndex = 3;
+            this.lvwListaAlimentos.Tag = "usacolor";
             this.lvwListaAlimentos.UseCompatibleStateImageBehavior = false;
             this.lvwListaAlimentos.View = System.Windows.Forms.View.Details;
+            this.lvwListaAlimentos.ColumnWidthChanging += new System.Windows.Forms.ColumnWidthChangingEventHandler(this.lvwListaAlimentos_ColumnWidthChanging);
             this.lvwListaAlimentos.Click += new System.EventHandler(this.lvwListaAlimentos_Click);
             this.lvwListaAlimentos.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lvwListaAlimentos_MouseUp);
             // 
             // columnHeader1
             // 
             this.columnHeader1.Text = "ID";
-            this.columnHeader1.Width = 25;
+            this.columnHeader1.Width = 35;
             // 
             // columnHeader2
             // 
             this.columnHeader2.Text = "Comida";
-            this.columnHeader2.Width = 150;
+            this.columnHeader2.Width = 190;
             // 
             // columnHeader3
             // 
@@ -109,7 +111,7 @@ namespace Bar
             // 
             this.btnMenos.Enabled = false;
             this.btnMenos.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnMenos.Location = new System.Drawing.Point(337, 195);
+            this.btnMenos.Location = new System.Drawing.Point(386, 366);
             this.btnMenos.Name = "btnMenos";
             this.btnMenos.Size = new System.Drawing.Size(75, 59);
             this.btnMenos.TabIndex = 4;
@@ -121,7 +123,7 @@ namespace Bar
             // 
             this.btnMas.Enabled = false;
             this.btnMas.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnMas.Location = new System.Drawing.Point(331, 25);
+            this.btnMas.Location = new System.Drawing.Point(386, 204);
             this.btnMas.Name = "btnMas";
             this.btnMas.Size = new System.Drawing.Size(75, 59);
             this.btnMas.TabIndex = 5;
@@ -131,7 +133,7 @@ namespace Bar
             // 
             // btnCerrarMesa
             // 
-            this.btnCerrarMesa.Location = new System.Drawing.Point(260, 308);
+            this.btnCerrarMesa.Location = new System.Drawing.Point(404, 515);
             this.btnCerrarMesa.Name = "btnCerrarMesa";
             this.btnCerrarMesa.Size = new System.Drawing.Size(86, 51);
             this.btnCerrarMesa.TabIndex = 6;
@@ -141,7 +143,7 @@ namespace Bar
             // 
             // btbConfirmarPedido
             // 
-            this.btbConfirmarPedido.Location = new System.Drawing.Point(136, 308);
+            this.btbConfirmarPedido.Location = new System.Drawing.Point(239, 515);
             this.btbConfirmarPedido.Name = "btbConfirmarPedido";
             this.btbConfirmarPedido.Size = new System.Drawing.Size(86, 51);
             this.btbConfirmarPedido.TabIndex = 7;
@@ -151,7 +153,7 @@ namespace Bar
             // 
             // btbCancelar
             // 
-            this.btbCancelar.Location = new System.Drawing.Point(12, 308);
+            this.btbCancelar.Location = new System.Drawing.Point(90, 515);
             this.btbCancelar.Name = "btbCancelar";
             this.btbCancelar.Size = new System.Drawing.Size(86, 51);
             this.btbCancelar.TabIndex = 8;
@@ -168,12 +170,13 @@ namespace Bar
             this.columnHeader8});
             this.lvwComidaEnMesa.FullRowSelect = true;
             this.lvwComidaEnMesa.HideSelection = false;
-            this.lvwComidaEnMesa.Location = new System.Drawing.Point(432, 13);
+            this.lvwComidaEnMesa.Location = new System.Drawing.Point(467, 142);
             this.lvwComidaEnMesa.Name = "lvwComidaEnMesa";
-            this.lvwComidaEnMesa.Size = new System.Drawing.Size(270, 261);
+            this.lvwComidaEnMesa.Size = new System.Drawing.Size(329, 312);
             this.lvwComidaEnMesa.TabIndex = 9;
             this.lvwComidaEnMesa.UseCompatibleStateImageBehavior = false;
             this.lvwComidaEnMesa.View = System.Windows.Forms.View.Details;
+            this.lvwComidaEnMesa.ColumnWidthChanging += new System.Windows.Forms.ColumnWidthChangingEventHandler(this.lvwComidaEnMesa_ColumnWidthChanging);
             // 
             // columnHeader5
             // 
@@ -188,17 +191,18 @@ namespace Bar
             // columnHeader7
             // 
             this.columnHeader7.Text = "Precio";
-            this.columnHeader7.Width = 50;
+            this.columnHeader7.Width = 80;
             // 
             // columnHeader8
             // 
             this.columnHeader8.Text = "Cantidad";
+            this.columnHeader8.Width = 80;
             // 
             // CargaDePedido
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(777, 434);
+            this.ClientSize = new System.Drawing.Size(808, 703);
             this.ControlBox = false;
             this.Controls.Add(this.lvwComidaEnMesa);
             this.Controls.Add(this.btbCancelar);

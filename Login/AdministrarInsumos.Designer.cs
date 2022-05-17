@@ -76,8 +76,10 @@ namespace Bar
             this.lvwListaInsumos.Name = "lvwListaInsumos";
             this.lvwListaInsumos.Size = new System.Drawing.Size(329, 325);
             this.lvwListaInsumos.TabIndex = 0;
+            this.lvwListaInsumos.Tag = "usacolor";
             this.lvwListaInsumos.UseCompatibleStateImageBehavior = false;
             this.lvwListaInsumos.View = System.Windows.Forms.View.Details;
+            this.lvwListaInsumos.ColumnWidthChanging += new System.Windows.Forms.ColumnWidthChangingEventHandler(this.lvwListaInsumos_ColumnWidthChanging);
             this.lvwListaInsumos.Click += new System.EventHandler(this.lvwListaInsumos_Click);
             this.lvwListaInsumos.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lvwListaInsumos_MouseUp);
             // 
@@ -102,18 +104,18 @@ namespace Bar
             // btnEliminarProducto
             // 
             this.btnEliminarProducto.Enabled = false;
-            this.btnEliminarProducto.Location = new System.Drawing.Point(54, 375);
+            this.btnEliminarProducto.Location = new System.Drawing.Point(54, 396);
             this.btnEliminarProducto.Name = "btnEliminarProducto";
             this.btnEliminarProducto.Size = new System.Drawing.Size(81, 63);
             this.btnEliminarProducto.TabIndex = 1;
-            this.btnEliminarProducto.Text = "Elimnar";
+            this.btnEliminarProducto.Text = "Eliminar";
             this.btnEliminarProducto.UseVisualStyleBackColor = true;
             this.btnEliminarProducto.Click += new System.EventHandler(this.btnEliminarProducto_Click);
             // 
             // btbCambiarPrecio
             // 
             this.btbCambiarPrecio.Enabled = false;
-            this.btbCambiarPrecio.Location = new System.Drawing.Point(308, 375);
+            this.btbCambiarPrecio.Location = new System.Drawing.Point(308, 395);
             this.btbCambiarPrecio.Name = "btbCambiarPrecio";
             this.btbCambiarPrecio.Size = new System.Drawing.Size(75, 23);
             this.btbCambiarPrecio.TabIndex = 2;
@@ -124,7 +126,7 @@ namespace Bar
             // btnAgregarStock
             // 
             this.btnAgregarStock.Enabled = false;
-            this.btnAgregarStock.Location = new System.Drawing.Point(308, 414);
+            this.btnAgregarStock.Location = new System.Drawing.Point(308, 436);
             this.btnAgregarStock.Name = "btnAgregarStock";
             this.btnAgregarStock.Size = new System.Drawing.Size(75, 23);
             this.btnAgregarStock.TabIndex = 3;
@@ -134,7 +136,7 @@ namespace Bar
             // 
             // txtNuevoPrecio
             // 
-            this.txtNuevoPrecio.Location = new System.Drawing.Point(172, 375);
+            this.txtNuevoPrecio.Location = new System.Drawing.Point(172, 396);
             this.txtNuevoPrecio.Name = "txtNuevoPrecio";
             this.txtNuevoPrecio.Size = new System.Drawing.Size(100, 23);
             this.txtNuevoPrecio.TabIndex = 4;
@@ -142,7 +144,7 @@ namespace Bar
             // 
             // txtNuevoStock
             // 
-            this.txtNuevoStock.Location = new System.Drawing.Point(172, 415);
+            this.txtNuevoStock.Location = new System.Drawing.Point(172, 436);
             this.txtNuevoStock.Name = "txtNuevoStock";
             this.txtNuevoStock.Size = new System.Drawing.Size(100, 23);
             this.txtNuevoStock.TabIndex = 5;
@@ -150,23 +152,23 @@ namespace Bar
             // 
             // txtNombreParaNuevoAlimento
             // 
-            this.txtNombreParaNuevoAlimento.Location = new System.Drawing.Point(530, 99);
+            this.txtNombreParaNuevoAlimento.Location = new System.Drawing.Point(481, 99);
             this.txtNombreParaNuevoAlimento.Name = "txtNombreParaNuevoAlimento";
-            this.txtNombreParaNuevoAlimento.Size = new System.Drawing.Size(100, 23);
+            this.txtNombreParaNuevoAlimento.Size = new System.Drawing.Size(188, 23);
             this.txtNombreParaNuevoAlimento.TabIndex = 6;
             // 
             // txtPrecioParaNuevoAlimento
             // 
-            this.txtPrecioParaNuevoAlimento.Location = new System.Drawing.Point(530, 139);
+            this.txtPrecioParaNuevoAlimento.Location = new System.Drawing.Point(481, 139);
             this.txtPrecioParaNuevoAlimento.Name = "txtPrecioParaNuevoAlimento";
-            this.txtPrecioParaNuevoAlimento.Size = new System.Drawing.Size(100, 23);
+            this.txtPrecioParaNuevoAlimento.Size = new System.Drawing.Size(188, 23);
             this.txtPrecioParaNuevoAlimento.TabIndex = 7;
             // 
             // txtStockParaNuevoAlimento
             // 
-            this.txtStockParaNuevoAlimento.Location = new System.Drawing.Point(530, 182);
+            this.txtStockParaNuevoAlimento.Location = new System.Drawing.Point(481, 182);
             this.txtStockParaNuevoAlimento.Name = "txtStockParaNuevoAlimento";
-            this.txtStockParaNuevoAlimento.Size = new System.Drawing.Size(100, 23);
+            this.txtStockParaNuevoAlimento.Size = new System.Drawing.Size(188, 23);
             this.txtStockParaNuevoAlimento.TabIndex = 8;
             // 
             // cboAlimento
@@ -176,7 +178,7 @@ namespace Bar
             this.cboAlimento.Items.AddRange(new object[] {
             "Comida",
             "Bebida"});
-            this.cboAlimento.Location = new System.Drawing.Point(444, 43);
+            this.cboAlimento.Location = new System.Drawing.Point(516, 43);
             this.cboAlimento.Name = "cboAlimento";
             this.cboAlimento.Size = new System.Drawing.Size(121, 23);
             this.cboAlimento.TabIndex = 10;
@@ -185,7 +187,7 @@ namespace Bar
             // lnlIngresoNombre
             // 
             this.lnlIngresoNombre.AutoSize = true;
-            this.lnlIngresoNombre.Location = new System.Drawing.Point(448, 102);
+            this.lnlIngresoNombre.Location = new System.Drawing.Point(413, 107);
             this.lnlIngresoNombre.Name = "lnlIngresoNombre";
             this.lnlIngresoNombre.Size = new System.Drawing.Size(51, 15);
             this.lnlIngresoNombre.TabIndex = 11;
@@ -194,7 +196,7 @@ namespace Bar
             // lnlIngresoPrecio
             // 
             this.lnlIngresoPrecio.AutoSize = true;
-            this.lnlIngresoPrecio.Location = new System.Drawing.Point(448, 142);
+            this.lnlIngresoPrecio.Location = new System.Drawing.Point(413, 147);
             this.lnlIngresoPrecio.Name = "lnlIngresoPrecio";
             this.lnlIngresoPrecio.Size = new System.Drawing.Size(40, 15);
             this.lnlIngresoPrecio.TabIndex = 12;
@@ -203,7 +205,7 @@ namespace Bar
             // lnlIngresoStock
             // 
             this.lnlIngresoStock.AutoSize = true;
-            this.lnlIngresoStock.Location = new System.Drawing.Point(452, 185);
+            this.lnlIngresoStock.Location = new System.Drawing.Point(413, 190);
             this.lnlIngresoStock.Name = "lnlIngresoStock";
             this.lnlIngresoStock.Size = new System.Drawing.Size(36, 15);
             this.lnlIngresoStock.TabIndex = 13;
@@ -212,11 +214,11 @@ namespace Bar
             // chkEsVegano
             // 
             this.chkEsVegano.AutoSize = true;
-            this.chkEsVegano.Location = new System.Drawing.Point(668, 103);
+            this.chkEsVegano.Location = new System.Drawing.Point(693, 103);
             this.chkEsVegano.Name = "chkEsVegano";
-            this.chkEsVegano.Size = new System.Drawing.Size(79, 19);
+            this.chkEsVegano.Size = new System.Drawing.Size(65, 19);
             this.chkEsVegano.TabIndex = 14;
-            this.chkEsVegano.Text = "Es Vegano";
+            this.chkEsVegano.Text = "Vegano";
             this.chkEsVegano.UseVisualStyleBackColor = true;
             // 
             // grpPresentacionBebida
@@ -327,9 +329,9 @@ namespace Bar
             // 
             // btbAgregarProducto
             // 
-            this.btbAgregarProducto.Location = new System.Drawing.Point(530, 385);
+            this.btbAgregarProducto.Location = new System.Drawing.Point(541, 395);
             this.btbAgregarProducto.Name = "btbAgregarProducto";
-            this.btbAgregarProducto.Size = new System.Drawing.Size(128, 42);
+            this.btbAgregarProducto.Size = new System.Drawing.Size(128, 64);
             this.btbAgregarProducto.TabIndex = 16;
             this.btbAgregarProducto.Text = "Agregar Producto";
             this.btbAgregarProducto.UseVisualStyleBackColor = true;
@@ -338,38 +340,41 @@ namespace Bar
             // lblErrorIngresoNombre
             // 
             this.lblErrorIngresoNombre.AutoSize = true;
-            this.lblErrorIngresoNombre.Location = new System.Drawing.Point(543, 81);
+            this.lblErrorIngresoNombre.Location = new System.Drawing.Point(675, 99);
             this.lblErrorIngresoNombre.Name = "lblErrorIngresoNombre";
-            this.lblErrorIngresoNombre.Size = new System.Drawing.Size(77, 15);
+            this.lblErrorIngresoNombre.Size = new System.Drawing.Size(12, 15);
             this.lblErrorIngresoNombre.TabIndex = 17;
-            this.lblErrorIngresoNombre.Text = "Error nombre";
+            this.lblErrorIngresoNombre.Tag = "Error";
+            this.lblErrorIngresoNombre.Text = "*";
             this.lblErrorIngresoNombre.Visible = false;
             // 
             // lblErrorIngresoPrecio
             // 
             this.lblErrorIngresoPrecio.AutoSize = true;
-            this.lblErrorIngresoPrecio.Location = new System.Drawing.Point(636, 147);
+            this.lblErrorIngresoPrecio.Location = new System.Drawing.Point(675, 147);
             this.lblErrorIngresoPrecio.Name = "lblErrorIngresoPrecio";
-            this.lblErrorIngresoPrecio.Size = new System.Drawing.Size(68, 15);
+            this.lblErrorIngresoPrecio.Size = new System.Drawing.Size(12, 15);
             this.lblErrorIngresoPrecio.TabIndex = 18;
-            this.lblErrorIngresoPrecio.Text = "Error Precio";
+            this.lblErrorIngresoPrecio.Tag = "Error";
+            this.lblErrorIngresoPrecio.Text = "*";
             this.lblErrorIngresoPrecio.Visible = false;
             // 
             // lblErrorIngresoStock
             // 
             this.lblErrorIngresoStock.AutoSize = true;
-            this.lblErrorIngresoStock.Location = new System.Drawing.Point(636, 185);
+            this.lblErrorIngresoStock.Location = new System.Drawing.Point(675, 185);
             this.lblErrorIngresoStock.Name = "lblErrorIngresoStock";
-            this.lblErrorIngresoStock.Size = new System.Drawing.Size(64, 15);
+            this.lblErrorIngresoStock.Size = new System.Drawing.Size(12, 15);
             this.lblErrorIngresoStock.TabIndex = 19;
-            this.lblErrorIngresoStock.Text = "Error Stock";
+            this.lblErrorIngresoStock.Tag = "Error";
+            this.lblErrorIngresoStock.Text = "*";
             this.lblErrorIngresoStock.Visible = false;
             // 
             // AdministrarInsumos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(784, 540);
             this.Controls.Add(this.lblErrorIngresoStock);
             this.Controls.Add(this.lblErrorIngresoPrecio);
             this.Controls.Add(this.lblErrorIngresoNombre);

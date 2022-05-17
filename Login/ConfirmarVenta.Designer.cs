@@ -49,6 +49,7 @@ namespace Bar
             this.chbPagaCredito.TabIndex = 0;
             this.chbPagaCredito.Text = "Paga con credito";
             this.chbPagaCredito.UseVisualStyleBackColor = true;
+            this.chbPagaCredito.MouseClick += new System.Windows.Forms.MouseEventHandler(this.chbPagaCredito_MouseClick);
             // 
             // chbUsaEstacionamiento
             // 
@@ -59,11 +60,12 @@ namespace Bar
             this.chbUsaEstacionamiento.TabIndex = 1;
             this.chbUsaEstacionamiento.Text = "Usa Estacionamiento";
             this.chbUsaEstacionamiento.UseVisualStyleBackColor = true;
+            this.chbUsaEstacionamiento.MouseClick += new System.Windows.Forms.MouseEventHandler(this.chbUsaEstacionamiento_MouseClick);
             // 
             // lblSaldoParaCerrar
             // 
             this.lblSaldoParaCerrar.AutoSize = true;
-            this.lblSaldoParaCerrar.Location = new System.Drawing.Point(313, 200);
+            this.lblSaldoParaCerrar.Location = new System.Drawing.Point(294, 135);
             this.lblSaldoParaCerrar.Name = "lblSaldoParaCerrar";
             this.lblSaldoParaCerrar.Size = new System.Drawing.Size(43, 15);
             this.lblSaldoParaCerrar.TabIndex = 3;
@@ -121,7 +123,7 @@ namespace Bar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(461, 312);
+            this.ClientSize = new System.Drawing.Size(504, 312);
             this.ControlBox = false;
             this.Controls.Add(this.lvwAlimentosPedidos);
             this.Controls.Add(this.btnCancelar);
@@ -131,7 +133,8 @@ namespace Bar
             this.Controls.Add(this.chbPagaCredito);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "ConfirmarVenta";
-            this.Text = "Venta";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Cerrar Venta";
             this.Load += new System.EventHandler(this.Venta_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

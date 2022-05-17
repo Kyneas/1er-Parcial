@@ -22,6 +22,7 @@ namespace Bar
 
         private void AdministrarUsuarios_Load(object sender, EventArgs e)
         {
+            LogicaForms.CambiarColores(this);
             AgregarTodosLosUsuarios();
         }
 
@@ -132,6 +133,12 @@ namespace Bar
                 e.Handled = true;
                 lblSoloNumeros.Visible = true;
             }
+        }
+
+        private void lvwListaUsuariosSistema_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e)
+        {
+            e.Cancel = true;
+            e.NewWidth = lvwListaUsuariosSistema.Columns[e.ColumnIndex].Width;
         }
     }
 }

@@ -21,15 +21,24 @@ namespace Bar
 
         public void AgregarTodosLosInsumosAListaStock()
         {
+            ListViewItem filaLista = null;
             lvwListaInsumos.Items.Clear();
             foreach (KeyValuePair<int,Alimento> item in Sistema.listaAlimentos)
             {
-                LogicaForms.AgregarFilaAListView(lvwListaInsumos,item.Key.ToString(),item.Value.NombreCompleto, item.Value.Precio.ToString(), item.Value.Stock.ToString());
+                filaLista = LogicaForms.AgregarFilaAListView(lvwListaInsumos,item.Key.ToString(),item.Value.NombreCompleto, item.Value.Precio.ToString(), item.Value.Stock.ToString());
+                filaLista.BackColor = Color.LightGreen;
+                if (item.Value.Stock <= 10)
+                    filaLista.BackColor = Color.Gold;
+                if (item.Value.Stock < 5)
+                    filaLista.BackColor = Color.Coral;
+                if (item.Value.Stock == 0)
+                    filaLista.BackColor = Color.Crimson;
             }
         }
 
         private void AdministrarInsumos_Load(object sender, EventArgs e)
         {
+            LogicaForms.CambiarColores(this);
             AgregarTodosLosInsumosAListaStock();
             this.cboAlimento.SelectedIndex = 0;
             this.rdoLata200ml.Checked = true;
@@ -206,6 +215,12 @@ namespace Bar
                     }
                 }
             }
+        }
+
+        private void lvwListaInsumos_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e)
+        {
+            e.Cancel = true;
+            e.NewWidth = lvwListaInsumos.Columns[e.ColumnIndex].Width;
         }
     }
 }

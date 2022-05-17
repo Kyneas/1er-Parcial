@@ -19,13 +19,14 @@ namespace Bar
         Posicion lugarCopia;
         Posicion lugarOriginal;
         Dictionary<int, Alimento> copiaDeListaDeComidasDelSistema;
+        ListView listaDeMenuPrincipal;
 
         public CargaDePedido()
         {
             InitializeComponent();
         }
 
-        public CargaDePedido(int mesa, Posicion lugarOriginal, bool esAdmin) : this()
+        public CargaDePedido(int mesa, Posicion lugarOriginal, bool esAdmin, ListView listaDeMenuPrincipal) : this()
         {
             this.mesa = mesa;
             this.lugarOriginal = lugarOriginal;
@@ -36,44 +37,52 @@ namespace Bar
             this.lugarCopia = new Posicion(lugarOriginal.Lugar);
 
 
-            foreach (KeyValuePair<int, Alimento> item in Sistema.listaAlimentos)//HAGO COPIA DE LISTA COMIDAS DE SISTEMA
-            {
-                if (item.Value is Comida)
-                {
-                    this.copiaDeListaDeComidasDelSistema.Add(item.Key, new Comida(Sistema.listaAlimentos[item.Key].Nombre,
-                    Sistema.listaAlimentos[item.Key].Precio, Sistema.listaAlimentos[item.Key].Cantidad, Sistema.listaAlimentos[item.Key].Stock,
-                    ((Comida)Sistema.listaAlimentos[item.Key]).Vegano));
-                }
-                else
-                {
-                    this.copiaDeListaDeComidasDelSistema.Add(item.Key, new Bebida(Sistema.listaAlimentos[item.Key].Nombre,
-                    Sistema.listaAlimentos[item.Key].Precio, Sistema.listaAlimentos[item.Key].Cantidad, Sistema.listaAlimentos[item.Key].Stock,
-                    ((Bebida)Sistema.listaAlimentos[item.Key]).Presentacion));
-                }
-            }
+            //foreach (KeyValuePair<int, Alimento> item in Sistema.listaAlimentos)//HAGO COPIA DE LISTA COMIDAS DE SISTEMA
+            //{
+            //    if (item.Value is Comida)
+            //    {
+            //        this.copiaDeListaDeComidasDelSistema.Add(item.Key, new Comida(Sistema.listaAlimentos[item.Key].Nombre,
+            //        Sistema.listaAlimentos[item.Key].Precio, Sistema.listaAlimentos[item.Key].Cantidad, Sistema.listaAlimentos[item.Key].Stock,
+            //        ((Comida)Sistema.listaAlimentos[item.Key]).Vegano));
+            //    }
+            //    else
+            //    {
+            //        this.copiaDeListaDeComidasDelSistema.Add(item.Key, new Bebida(Sistema.listaAlimentos[item.Key].Nombre,
+            //        Sistema.listaAlimentos[item.Key].Precio, Sistema.listaAlimentos[item.Key].Cantidad, Sistema.listaAlimentos[item.Key].Stock,
+            //        ((Bebida)Sistema.listaAlimentos[item.Key]).Presentacion));
+            //    }
+            //}
 
-            foreach (KeyValuePair<int, Alimento> item in lugarOriginal.ListaComidaPedida)
-            {
-                if (item.Value is Comida)
-                {
-                    this.lugarCopia.ListaComidaPedida.Add(item.Key, new Comida(lugarOriginal.ListaComidaPedida[item.Key].Nombre,
-                    lugarOriginal.ListaComidaPedida[item.Key].Precio, lugarOriginal.ListaComidaPedida[item.Key].Cantidad, lugarOriginal.ListaComidaPedida[item.Key].Stock,
-                    ((Comida)lugarOriginal.ListaComidaPedida[item.Key]).Vegano));
-                }
-                else
-                {
-                    this.lugarCopia.ListaComidaPedida.Add(item.Key, new Bebida(lugarOriginal.ListaComidaPedida[item.Key].Nombre,
-                    lugarOriginal.ListaComidaPedida[item.Key].Precio, lugarOriginal.ListaComidaPedida[item.Key].Cantidad, lugarOriginal.ListaComidaPedida[item.Key].Stock,
-                    ((Bebida)lugarOriginal.ListaComidaPedida[item.Key]).Presentacion));
-                }
-            }
+            //foreach (KeyValuePair<int, Alimento> item in lugarOriginal.ListaComidaPedida)
+            //{
+            //    if (item.Value is Comida)
+            //    {
+            //        this.lugarCopia.ListaComidaPedida.Add(item.Key, new Comida(lugarOriginal.ListaComidaPedida[item.Key].Nombre,
+            //        lugarOriginal.ListaComidaPedida[item.Key].Precio, lugarOriginal.ListaComidaPedida[item.Key].Cantidad, lugarOriginal.ListaComidaPedida[item.Key].Stock,
+            //        ((Comida)lugarOriginal.ListaComidaPedida[item.Key]).Vegano));
+            //    }
+            //    else
+            //    {
+            //        this.lugarCopia.ListaComidaPedida.Add(item.Key, new Bebida(lugarOriginal.ListaComidaPedida[item.Key].Nombre,
+            //        lugarOriginal.ListaComidaPedida[item.Key].Precio, lugarOriginal.ListaComidaPedida[item.Key].Cantidad, lugarOriginal.ListaComidaPedida[item.Key].Stock,
+            //        ((Bebida)lugarOriginal.ListaComidaPedida[item.Key]).Presentacion));
+            //    }
+            //}
+
+            Sistema.ClonarLista(Sistema.listaAlimentos, this.copiaDeListaDeComidasDelSistema);
+            Sistema.ClonarLista(lugarOriginal.ListaComidaPedida, this.lugarCopia.ListaComidaPedida);
+
+            this.listaDeMenuPrincipal = listaDeMenuPrincipal;
         }
 
         private void CargaDePedido_Load(object sender, EventArgs e)
         {
+            LogicaForms.CambiarColores(this);
+            this.lblNumeroMesa.Font = new Font("Calibri", 40, FontStyle.Bold);
+            this.lblSaldo.Font = new Font("Calibri", 30, FontStyle.Bold);
             btnMenos.Visible = esAdmin;
             lblSaldo.Text = $"Saldo: ${lugarCopia.Saldo}";
-            lblNumeroMesa.Text = $"{mesa}";
+            lblNumeroMesa.Text = $"Mesa {mesa}";
             ValidarSiHabiaSaldoParaHabilitarBotones();
             AgregarTodasLosAlimentosDisponiblesALista();
 
@@ -270,6 +279,8 @@ namespace Bar
                         ((Bebida)Sistema.listaAlimentos[item.Key]).Presentacion));
                     }
                 }
+
+                ActualizarListViewDeMenuPrincipal(listaDeMenuPrincipal);
             }
 
             foreach (KeyValuePair<int, Alimento> item in this.lugarOriginal.ListaComidaPedida)
@@ -313,6 +324,31 @@ namespace Bar
                 this.lugarCopia.ListaComidaPedida[id].Cantidad--;
             }
             this.copiaDeListaDeComidasDelSistema[id].Stock++;
+        }
+
+        private void ActualizarListViewDeMenuPrincipal(ListView listaMenuPrincipal) 
+        {
+            listaMenuPrincipal.Items.Clear();
+            ListViewItem filaLista = null;
+            foreach (KeyValuePair<int, Posicion> item in Sistema.listaPosiciones)
+            {
+                filaLista = LogicaForms.AgregarFilaAListView(listaMenuPrincipal, item.Key.ToString(), item.Value.Lugar.ToString(), item.Value.Saldo.ToString());
+                filaLista.BackColor = Color.FromArgb(40, 40, 40);
+                if (item.Value.Saldo > 0)
+                    filaLista.BackColor = Color.FromArgb(238, 154, 73);
+            }
+        }
+
+        private void lvwListaAlimentos_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e)
+        {
+            e.Cancel = true;
+            e.NewWidth = lvwListaAlimentos.Columns[e.ColumnIndex].Width;
+        }
+
+        private void lvwComidaEnMesa_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e)
+        {
+            e.Cancel = true;
+            e.NewWidth = lvwComidaEnMesa.Columns[e.ColumnIndex].Width;
         }
     }
 }

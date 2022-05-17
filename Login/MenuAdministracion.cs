@@ -46,5 +46,15 @@ namespace Bar
             pnlAdministracion.Controls.Add(adminVentas);
             adminVentas.Show();
         }
+
+        private void btnSalirAdmin_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
+        }
+
+        private void MenuAdministracion_Load(object sender, EventArgs e)
+        {
+            LogicaForms.CambiarColores(this);
+        }
     }
 }

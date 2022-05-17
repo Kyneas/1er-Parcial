@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.Drawing;
 using Entidades;
+using System.Media;
 
 namespace Bar
 {
     public partial class Login : Form
     {
+        SoundPlayer sonidoLoginOk;
         public Login()
         {
             InitializeComponent();
+            this.sonidoLoginOk = new SoundPlayer(Properties.Resources.login);
         }
 
         private void txtDni_KeyPress(object sender, KeyPressEventArgs e)
@@ -38,6 +42,7 @@ namespace Bar
                         txtClave.Text = String.Empty;
                         MenuPrincipal menuPrincipal = new MenuPrincipal(usuario);
                         this.Hide();
+                        sonidoLoginOk.Play();
                         if (menuPrincipal.ShowDialog() == DialogResult.Yes)
                         {
                             this.Show();
@@ -78,6 +83,7 @@ namespace Bar
         private void Login_Load(object sender, EventArgs e)
         {
             this.ControlBox = false;
+            LogicaForms.CambiarColores(this);
         }
 
         private void btbSalir_Click(object sender, EventArgs e)

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Entidades;
+using System.Media;
 
 
 namespace Bar
@@ -16,6 +17,8 @@ namespace Bar
     {
         Persona usuario;
         int mesaSeleccionada;
+        SoundPlayer sonidoAbrirMesa;
+        SoundPlayer sonidoSalir;
         private MenuPrincipal()
         {
             InitializeComponent();
@@ -24,14 +27,16 @@ namespace Bar
         public MenuPrincipal(Persona usuario) : this()
         {
             this.usuario = usuario;
+            this.sonidoAbrirMesa = new SoundPlayer(Properties.Resources.modAbrirMesa);
+            this.sonidoSalir = new SoundPlayer(Properties.Resources.exit);
         }
 
         private void MenuPrincipal_Load(object sender, EventArgs e)
         {
-            this.btnAdmin.Visible = usuario.EsAdmin;
-            this.lvwUbicaciones.FullRowSelect = true;
-
             AgregarTodasLasPosiciones();
+            LogicaForms.CambiarColores(this);
+            this.pnlAdminArriba.Visible = usuario.EsAdmin;
+
         }
 
         public void AgregarTodasLasPosiciones()
@@ -41,9 +46,10 @@ namespace Bar
             foreach (KeyValuePair<int, Posicion> item in Sistema.listaPosiciones)
             {
                 filaLista = LogicaForms.AgregarFilaAListView(lvwUbicaciones, item.Key.ToString(), item.Value.Lugar.ToString(), item.Value.Saldo.ToString());
-                filaLista.BackColor = Color.PaleGreen;
+                //filaLista.BackColor = Color.FromArgb(179, 229, 44);
+                filaLista.BackColor = Color.FromArgb(40, 40, 40);
                 if (item.Value.Saldo > 0)
-                    filaLista.BackColor = Color.SkyBlue;
+                    filaLista.BackColor = Color.FromArgb(238, 154, 73);
             }
         }
 
@@ -53,6 +59,8 @@ namespace Bar
 
             if (resultado == DialogResult.Yes)
             {
+                sonidoSalir.Play();
+                Task.Delay(150).Wait();
                 Application.Exit();
             }
         }
@@ -65,14 +73,15 @@ namespace Bar
 
         private void lvwUbicaciones_Click(object sender, EventArgs e)
         {
-            LogicaForms.CerrarFormulariosDelPanel(this.pnlPrincipal);
-
             mesaSeleccionada = lvwUbicaciones.SelectedIndices[0];
-            
             int id = int.Parse(lvwUbicaciones.SelectedItems[0].Text);
-            CargaDePedido menuPedido = new CargaDePedido(id, Sistema.listaPosiciones[id], usuario.EsAdmin);
+            AgregarTodasLasPosiciones();
+            LogicaForms.CerrarFormulariosDelPanel(this.pnlPrincipal);
+            
+            CargaDePedido menuPedido = new CargaDePedido(id, Sistema.listaPosiciones[id], usuario.EsAdmin, lvwUbicaciones);
             menuPedido.TopLevel = false;
             pnlPrincipal.Controls.Add(menuPedido);
+            sonidoAbrirMesa.Play();
             menuPedido.Show();
         }
 
@@ -110,8 +119,13 @@ namespace Bar
         {
             if (Sistema.ExisteMesa(this.txtBuscarMesa.Text, out int mesa))
             {
-                CargaDePedido menuPedido = new CargaDePedido(mesa, Sistema.listaPosiciones[mesa], usuario.EsAdmin);
-                menuPedido.ShowDialog();
+                LogicaForms.CerrarFormulariosDelPanel(this.pnlPrincipal);
+
+                CargaDePedido menuPedido = new CargaDePedido(mesa, Sistema.listaPosiciones[mesa], usuario.EsAdmin, lvwUbicaciones);
+                menuPedido.TopLevel = false;
+                pnlPrincipal.Controls.Add(menuPedido);
+                sonidoAbrirMesa.Play();
+                menuPedido.Show();
             }
             else
             {
@@ -121,6 +135,8 @@ namespace Bar
 
         private void btnAdmin_Click(object sender, EventArgs e)
         {
+            AgregarTodasLasPosiciones();
+
             LogicaForms.CerrarFormulariosDelPanel(this.pnlPrincipal);
             lvwUbicaciones.Items[mesaSeleccionada].Selected = false;
             MenuAdministracion menuAdmin = new MenuAdministracion();

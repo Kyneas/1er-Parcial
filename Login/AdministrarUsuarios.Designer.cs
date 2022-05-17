@@ -61,12 +61,13 @@ namespace Bar
             this.columnHeader3});
             this.lvwListaUsuariosSistema.FullRowSelect = true;
             this.lvwListaUsuariosSistema.HideSelection = false;
-            this.lvwListaUsuariosSistema.Location = new System.Drawing.Point(32, 40);
+            this.lvwListaUsuariosSistema.Location = new System.Drawing.Point(12, 31);
             this.lvwListaUsuariosSistema.Name = "lvwListaUsuariosSistema";
-            this.lvwListaUsuariosSistema.Size = new System.Drawing.Size(298, 273);
+            this.lvwListaUsuariosSistema.Size = new System.Drawing.Size(332, 420);
             this.lvwListaUsuariosSistema.TabIndex = 0;
             this.lvwListaUsuariosSistema.UseCompatibleStateImageBehavior = false;
             this.lvwListaUsuariosSistema.View = System.Windows.Forms.View.Details;
+            this.lvwListaUsuariosSistema.ColumnWidthChanging += new System.Windows.Forms.ColumnWidthChangingEventHandler(this.lvwListaUsuariosSistema_ColumnWidthChanging);
             this.lvwListaUsuariosSistema.Click += new System.EventHandler(this.lvwListaUsuariosSistema_Click);
             this.lvwListaUsuariosSistema.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lvwListaUsuariosSistema_MouseUp);
             // 
@@ -78,7 +79,7 @@ namespace Bar
             // columnHeader2
             // 
             this.columnHeader2.Text = "Nombre Completo";
-            this.columnHeader2.Width = 140;
+            this.columnHeader2.Width = 220;
             // 
             // columnHeader3
             // 
@@ -98,14 +99,14 @@ namespace Bar
             this.lblAgregarUsuario.AutoSize = true;
             this.lblAgregarUsuario.Location = new System.Drawing.Point(350, 13);
             this.lblAgregarUsuario.Name = "lblAgregarUsuario";
-            this.lblAgregarUsuario.Size = new System.Drawing.Size(126, 15);
+            this.lblAgregarUsuario.Size = new System.Drawing.Size(130, 15);
             this.lblAgregarUsuario.TabIndex = 2;
-            this.lblAgregarUsuario.Text = "Agrega Nuevo Usuario";
+            this.lblAgregarUsuario.Text = "Agregar nuevo usuario:";
             // 
             // lblDNI
             // 
             this.lblDNI.AutoSize = true;
-            this.lblDNI.Location = new System.Drawing.Point(350, 50);
+            this.lblDNI.Location = new System.Drawing.Point(402, 92);
             this.lblDNI.Name = "lblDNI";
             this.lblDNI.Size = new System.Drawing.Size(30, 15);
             this.lblDNI.TabIndex = 3;
@@ -114,7 +115,7 @@ namespace Bar
             // lblNombre
             // 
             this.lblNombre.AutoSize = true;
-            this.lblNombre.Location = new System.Drawing.Point(350, 93);
+            this.lblNombre.Location = new System.Drawing.Point(402, 161);
             this.lblNombre.Name = "lblNombre";
             this.lblNombre.Size = new System.Drawing.Size(54, 15);
             this.lblNombre.TabIndex = 4;
@@ -123,7 +124,7 @@ namespace Bar
             // lblApellido
             // 
             this.lblApellido.AutoSize = true;
-            this.lblApellido.Location = new System.Drawing.Point(350, 132);
+            this.lblApellido.Location = new System.Drawing.Point(402, 234);
             this.lblApellido.Name = "lblApellido";
             this.lblApellido.Size = new System.Drawing.Size(54, 15);
             this.lblApellido.TabIndex = 5;
@@ -132,7 +133,7 @@ namespace Bar
             // lblClave
             // 
             this.lblClave.AutoSize = true;
-            this.lblClave.Location = new System.Drawing.Point(350, 170);
+            this.lblClave.Location = new System.Drawing.Point(402, 301);
             this.lblClave.Name = "lblClave";
             this.lblClave.Size = new System.Drawing.Size(39, 15);
             this.lblClave.TabIndex = 6;
@@ -141,7 +142,7 @@ namespace Bar
             // chkEsAdministrador
             // 
             this.chkEsAdministrador.AutoSize = true;
-            this.chkEsAdministrador.Location = new System.Drawing.Point(350, 221);
+            this.chkEsAdministrador.Location = new System.Drawing.Point(502, 384);
             this.chkEsAdministrador.Name = "chkEsAdministrador";
             this.chkEsAdministrador.Size = new System.Drawing.Size(114, 19);
             this.chkEsAdministrador.TabIndex = 7;
@@ -150,36 +151,36 @@ namespace Bar
             // 
             // txtDNI
             // 
-            this.txtDNI.Location = new System.Drawing.Point(427, 50);
+            this.txtDNI.Location = new System.Drawing.Point(485, 89);
             this.txtDNI.Name = "txtDNI";
-            this.txtDNI.Size = new System.Drawing.Size(100, 23);
+            this.txtDNI.Size = new System.Drawing.Size(190, 23);
             this.txtDNI.TabIndex = 8;
             this.txtDNI.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDNI_KeyPress);
             // 
             // txtNombre
             // 
-            this.txtNombre.Location = new System.Drawing.Point(427, 93);
+            this.txtNombre.Location = new System.Drawing.Point(485, 158);
             this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(100, 23);
+            this.txtNombre.Size = new System.Drawing.Size(190, 23);
             this.txtNombre.TabIndex = 9;
             // 
             // txtApellido
             // 
-            this.txtApellido.Location = new System.Drawing.Point(427, 132);
+            this.txtApellido.Location = new System.Drawing.Point(485, 231);
             this.txtApellido.Name = "txtApellido";
-            this.txtApellido.Size = new System.Drawing.Size(100, 23);
+            this.txtApellido.Size = new System.Drawing.Size(190, 23);
             this.txtApellido.TabIndex = 10;
             // 
             // txtClave
             // 
-            this.txtClave.Location = new System.Drawing.Point(427, 170);
+            this.txtClave.Location = new System.Drawing.Point(485, 298);
             this.txtClave.Name = "txtClave";
-            this.txtClave.Size = new System.Drawing.Size(100, 23);
+            this.txtClave.Size = new System.Drawing.Size(190, 23);
             this.txtClave.TabIndex = 11;
             // 
             // btnEliminarUsuario
             // 
-            this.btnEliminarUsuario.Location = new System.Drawing.Point(128, 319);
+            this.btnEliminarUsuario.Location = new System.Drawing.Point(103, 457);
             this.btnEliminarUsuario.Name = "btnEliminarUsuario";
             this.btnEliminarUsuario.Size = new System.Drawing.Size(117, 48);
             this.btnEliminarUsuario.TabIndex = 12;
@@ -189,7 +190,7 @@ namespace Bar
             // 
             // btnCrearUsuario
             // 
-            this.btnCrearUsuario.Location = new System.Drawing.Point(410, 319);
+            this.btnCrearUsuario.Location = new System.Drawing.Point(499, 457);
             this.btnCrearUsuario.Name = "btnCrearUsuario";
             this.btnCrearUsuario.Size = new System.Drawing.Size(117, 48);
             this.btnCrearUsuario.TabIndex = 13;
@@ -209,41 +210,45 @@ namespace Bar
             // lblErrorNombre
             // 
             this.lblErrorNombre.AutoSize = true;
-            this.lblErrorNombre.Location = new System.Drawing.Point(534, 100);
+            this.lblErrorNombre.Location = new System.Drawing.Point(681, 161);
             this.lblErrorNombre.Name = "lblErrorNombre";
-            this.lblErrorNombre.Size = new System.Drawing.Size(79, 15);
+            this.lblErrorNombre.Size = new System.Drawing.Size(12, 15);
             this.lblErrorNombre.TabIndex = 15;
-            this.lblErrorNombre.Text = "Error Nombre";
+            this.lblErrorNombre.Tag = "Error";
+            this.lblErrorNombre.Text = "*";
             this.lblErrorNombre.Visible = false;
             // 
             // lblErrorApellido
             // 
             this.lblErrorApellido.AutoSize = true;
-            this.lblErrorApellido.Location = new System.Drawing.Point(534, 139);
+            this.lblErrorApellido.Location = new System.Drawing.Point(681, 231);
             this.lblErrorApellido.Name = "lblErrorApellido";
-            this.lblErrorApellido.Size = new System.Drawing.Size(79, 15);
+            this.lblErrorApellido.Size = new System.Drawing.Size(12, 15);
             this.lblErrorApellido.TabIndex = 16;
-            this.lblErrorApellido.Text = "Error Apellido";
+            this.lblErrorApellido.Tag = "Error";
+            this.lblErrorApellido.Text = "*";
             this.lblErrorApellido.Visible = false;
             // 
             // lblErrorClave
             // 
             this.lblErrorClave.AutoSize = true;
-            this.lblErrorClave.Location = new System.Drawing.Point(534, 177);
+            this.lblErrorClave.Location = new System.Drawing.Point(681, 298);
             this.lblErrorClave.Name = "lblErrorClave";
-            this.lblErrorClave.Size = new System.Drawing.Size(64, 15);
+            this.lblErrorClave.Size = new System.Drawing.Size(12, 15);
             this.lblErrorClave.TabIndex = 17;
-            this.lblErrorClave.Text = "Error Clave";
+            this.lblErrorClave.Tag = "Error";
+            this.lblErrorClave.Text = "*";
             this.lblErrorClave.Visible = false;
             // 
             // lblSoloNumeros
             // 
             this.lblSoloNumeros.AutoSize = true;
             this.lblSoloNumeros.ForeColor = System.Drawing.Color.Red;
-            this.lblSoloNumeros.Location = new System.Drawing.Point(438, 76);
+            this.lblSoloNumeros.Location = new System.Drawing.Point(681, 92);
             this.lblSoloNumeros.Name = "lblSoloNumeros";
             this.lblSoloNumeros.Size = new System.Drawing.Size(80, 15);
             this.lblSoloNumeros.TabIndex = 18;
+            this.lblSoloNumeros.Tag = "Error";
             this.lblSoloNumeros.Text = "Solo numeros";
             this.lblSoloNumeros.Visible = false;
             // 
@@ -251,7 +256,7 @@ namespace Bar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(615, 379);
+            this.ClientSize = new System.Drawing.Size(784, 540);
             this.Controls.Add(this.lblSoloNumeros);
             this.Controls.Add(this.lblErrorClave);
             this.Controls.Add(this.lblErrorApellido);

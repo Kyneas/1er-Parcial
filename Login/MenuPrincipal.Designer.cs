@@ -29,7 +29,6 @@ namespace Bar
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MenuPrincipal));
             this.btnSalir = new System.Windows.Forms.Button();
             this.lvwUbicaciones = new System.Windows.Forms.ListView();
             this.lblCuadroUbicaciones_ID = new System.Windows.Forms.ColumnHeader();
@@ -40,6 +39,7 @@ namespace Bar
             this.btnIrAMesa = new System.Windows.Forms.Button();
             this.btnAdmin = new System.Windows.Forms.Button();
             this.pnlPrincipal = new System.Windows.Forms.Panel();
+            this.pnlAdminArriba = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
             // btnSalir
@@ -49,11 +49,12 @@ namespace Bar
             this.btnSalir.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btnSalir.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSalir.Image = ((System.Drawing.Image)(resources.GetObject("btnSalir.Image")));
-            this.btnSalir.Location = new System.Drawing.Point(124, 676);
+            this.btnSalir.Image = global::Bar.Properties.Resources._1492790919_81power_84209;
+            this.btnSalir.Location = new System.Drawing.Point(143, 655);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(42, 42);
             this.btnSalir.TabIndex = 2;
+            this.btnSalir.Tag = "conImagen";
             this.btnSalir.UseVisualStyleBackColor = false;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
@@ -67,11 +68,13 @@ namespace Bar
             this.lblCuadroUbicaciones_Saldo});
             this.lvwUbicaciones.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lvwUbicaciones.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lvwUbicaciones.FullRowSelect = true;
             this.lvwUbicaciones.HideSelection = false;
-            this.lvwUbicaciones.Location = new System.Drawing.Point(12, 106);
+            this.lvwUbicaciones.Location = new System.Drawing.Point(13, 89);
             this.lvwUbicaciones.Name = "lvwUbicaciones";
-            this.lvwUbicaciones.Size = new System.Drawing.Size(195, 531);
+            this.lvwUbicaciones.Size = new System.Drawing.Size(233, 529);
             this.lvwUbicaciones.TabIndex = 3;
+            this.lvwUbicaciones.Tag = "";
             this.lvwUbicaciones.UseCompatibleStateImageBehavior = false;
             this.lvwUbicaciones.View = System.Windows.Forms.View.Details;
             this.lvwUbicaciones.ColumnWidthChanging += new System.Windows.Forms.ColumnWidthChangingEventHandler(this.lvwUbicaciones_ColumnWidthChanging);
@@ -80,16 +83,19 @@ namespace Bar
             // lblCuadroUbicaciones_ID
             // 
             this.lblCuadroUbicaciones_ID.Text = "#";
-            this.lblCuadroUbicaciones_ID.Width = 35;
+            this.lblCuadroUbicaciones_ID.Width = 40;
             // 
             // lblCuadroUbicaciones_Ubicacion
             // 
             this.lblCuadroUbicaciones_Ubicacion.Text = "Ubicacion";
-            this.lblCuadroUbicaciones_Ubicacion.Width = 100;
+            this.lblCuadroUbicaciones_Ubicacion.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.lblCuadroUbicaciones_Ubicacion.Width = 120;
             // 
             // lblCuadroUbicaciones_Saldo
             // 
             this.lblCuadroUbicaciones_Saldo.Text = "$";
+            this.lblCuadroUbicaciones_Saldo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.lblCuadroUbicaciones_Saldo.Width = 70;
             // 
             // btbDesloguear
             // 
@@ -98,17 +104,18 @@ namespace Bar
             this.btbDesloguear.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btbDesloguear.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btbDesloguear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btbDesloguear.Image = ((System.Drawing.Image)(resources.GetObject("btbDesloguear.Image")));
-            this.btbDesloguear.Location = new System.Drawing.Point(46, 673);
+            this.btbDesloguear.Image = global::Bar.Properties.Resources._4213459_common_door_exit_logout_out_signout_115411;
+            this.btbDesloguear.Location = new System.Drawing.Point(57, 655);
             this.btbDesloguear.Name = "btbDesloguear";
             this.btbDesloguear.Size = new System.Drawing.Size(42, 42);
             this.btbDesloguear.TabIndex = 4;
+            this.btbDesloguear.Tag = "conImagen";
             this.btbDesloguear.UseVisualStyleBackColor = false;
             this.btbDesloguear.Click += new System.EventHandler(this.btbDesloguear_Click);
             // 
             // txtBuscarMesa
             // 
-            this.txtBuscarMesa.Location = new System.Drawing.Point(12, 70);
+            this.txtBuscarMesa.Location = new System.Drawing.Point(13, 60);
             this.txtBuscarMesa.Name = "txtBuscarMesa";
             this.txtBuscarMesa.PlaceholderText = "Buscar mesa...";
             this.txtBuscarMesa.Size = new System.Drawing.Size(100, 23);
@@ -117,9 +124,9 @@ namespace Bar
             // 
             // btnIrAMesa
             // 
-            this.btnIrAMesa.Location = new System.Drawing.Point(176, 70);
+            this.btnIrAMesa.Location = new System.Drawing.Point(176, 60);
             this.btnIrAMesa.Name = "btnIrAMesa";
-            this.btnIrAMesa.Size = new System.Drawing.Size(31, 23);
+            this.btnIrAMesa.Size = new System.Drawing.Size(70, 23);
             this.btnIrAMesa.TabIndex = 7;
             this.btnIrAMesa.Text = "Ir...";
             this.btnIrAMesa.UseVisualStyleBackColor = true;
@@ -127,26 +134,39 @@ namespace Bar
             // 
             // btnAdmin
             // 
-            this.btnAdmin.Location = new System.Drawing.Point(46, 12);
+            this.btnAdmin.Location = new System.Drawing.Point(12, 12);
             this.btnAdmin.Name = "btnAdmin";
-            this.btnAdmin.Size = new System.Drawing.Size(99, 42);
+            this.btnAdmin.Size = new System.Drawing.Size(233, 42);
             this.btnAdmin.TabIndex = 8;
-            this.btnAdmin.Text = "Administacion";
+            this.btnAdmin.Text = "Administracion";
             this.btnAdmin.UseVisualStyleBackColor = true;
             this.btnAdmin.Click += new System.EventHandler(this.btnAdmin_Click);
             // 
             // pnlPrincipal
             // 
-            this.pnlPrincipal.Location = new System.Drawing.Point(252, 37);
+            this.pnlPrincipal.BackColor = System.Drawing.Color.Transparent;
+            this.pnlPrincipal.BackgroundImage = global::Bar.Properties.Resources.logo_utnMODIFICADO2;
+            this.pnlPrincipal.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.pnlPrincipal.Location = new System.Drawing.Point(252, 12);
             this.pnlPrincipal.Name = "pnlPrincipal";
-            this.pnlPrincipal.Size = new System.Drawing.Size(778, 608);
+            this.pnlPrincipal.Size = new System.Drawing.Size(808, 703);
             this.pnlPrincipal.TabIndex = 9;
+            // 
+            // pnlAdminArriba
+            // 
+            this.pnlAdminArriba.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.pnlAdminArriba.Location = new System.Drawing.Point(-2, 0);
+            this.pnlAdminArriba.Name = "pnlAdminArriba";
+            this.pnlAdminArriba.Size = new System.Drawing.Size(1078, 10);
+            this.pnlAdminArriba.TabIndex = 10;
+            this.pnlAdminArriba.Visible = false;
             // 
             // MenuPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1072, 727);
             this.ControlBox = false;
             this.Controls.Add(this.pnlPrincipal);
@@ -156,8 +176,9 @@ namespace Bar
             this.Controls.Add(this.btbDesloguear);
             this.Controls.Add(this.lvwUbicaciones);
             this.Controls.Add(this.btnSalir);
+            this.Controls.Add(this.pnlAdminArriba);
             this.DoubleBuffered = true;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "MenuPrincipal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MenuPrincipal";
@@ -179,5 +200,6 @@ namespace Bar
         private System.Windows.Forms.Button btnIrAMesa;
         private System.Windows.Forms.Button btnAdmin;
         private System.Windows.Forms.Panel pnlPrincipal;
+        private System.Windows.Forms.Panel pnlAdminArriba;
     }
 }

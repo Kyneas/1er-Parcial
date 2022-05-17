@@ -47,7 +47,7 @@ namespace Bar
             // lblDni
             // 
             this.lblDni.AutoSize = true;
-            this.lblDni.Location = new System.Drawing.Point(118, 55);
+            this.lblDni.Location = new System.Drawing.Point(97, 76);
             this.lblDni.Name = "lblDni";
             this.lblDni.Size = new System.Drawing.Size(27, 15);
             this.lblDni.TabIndex = 0;
@@ -56,7 +56,7 @@ namespace Bar
             // lblClave
             // 
             this.lblClave.AutoSize = true;
-            this.lblClave.Location = new System.Drawing.Point(118, 118);
+            this.lblClave.Location = new System.Drawing.Point(97, 167);
             this.lblClave.Name = "lblClave";
             this.lblClave.Size = new System.Drawing.Size(36, 15);
             this.lblClave.TabIndex = 1;
@@ -64,9 +64,9 @@ namespace Bar
             // 
             // btnLoguear
             // 
-            this.btnLoguear.Location = new System.Drawing.Point(118, 191);
+            this.btnLoguear.Location = new System.Drawing.Point(98, 259);
             this.btnLoguear.Name = "btnLoguear";
-            this.btnLoguear.Size = new System.Drawing.Size(100, 23);
+            this.btnLoguear.Size = new System.Drawing.Size(100, 51);
             this.btnLoguear.TabIndex = 2;
             this.btnLoguear.Text = "Ingresar";
             this.btnLoguear.UseVisualStyleBackColor = true;
@@ -74,7 +74,7 @@ namespace Bar
             // 
             // txtDni
             // 
-            this.txtDni.Location = new System.Drawing.Point(118, 73);
+            this.txtDni.Location = new System.Drawing.Point(98, 94);
             this.txtDni.Name = "txtDni";
             this.txtDni.Size = new System.Drawing.Size(100, 23);
             this.txtDni.TabIndex = 3;
@@ -82,7 +82,7 @@ namespace Bar
             // 
             // txtClave
             // 
-            this.txtClave.Location = new System.Drawing.Point(118, 136);
+            this.txtClave.Location = new System.Drawing.Point(97, 185);
             this.txtClave.Name = "txtClave";
             this.txtClave.Size = new System.Drawing.Size(100, 23);
             this.txtClave.TabIndex = 4;
@@ -93,10 +93,11 @@ namespace Bar
             // 
             this.lblSoloNumeros.AutoSize = true;
             this.lblSoloNumeros.ForeColor = System.Drawing.Color.Red;
-            this.lblSoloNumeros.Location = new System.Drawing.Point(118, 99);
+            this.lblSoloNumeros.Location = new System.Drawing.Point(98, 120);
             this.lblSoloNumeros.Name = "lblSoloNumeros";
             this.lblSoloNumeros.Size = new System.Drawing.Size(80, 15);
             this.lblSoloNumeros.TabIndex = 5;
+            this.lblSoloNumeros.Tag = "Error";
             this.lblSoloNumeros.Text = "Solo numeros";
             this.lblSoloNumeros.Visible = false;
             // 
@@ -104,18 +105,19 @@ namespace Bar
             // 
             this.lblErrorDniClave.AutoSize = true;
             this.lblErrorDniClave.ForeColor = System.Drawing.Color.Red;
-            this.lblErrorDniClave.Location = new System.Drawing.Point(118, 30);
+            this.lblErrorDniClave.Location = new System.Drawing.Point(98, 44);
             this.lblErrorDniClave.Name = "lblErrorDniClave";
             this.lblErrorDniClave.Size = new System.Drawing.Size(117, 15);
             this.lblErrorDniClave.TabIndex = 6;
+            this.lblErrorDniClave.Tag = "Error";
             this.lblErrorDniClave.Text = "DNI/Clave Incorrecta";
             this.lblErrorDniClave.Visible = false;
             // 
             // btnLoguearAdmin
             // 
-            this.btnLoguearAdmin.Location = new System.Drawing.Point(24, 238);
+            this.btnLoguearAdmin.Location = new System.Drawing.Point(12, 357);
             this.btnLoguearAdmin.Name = "btnLoguearAdmin";
-            this.btnLoguearAdmin.Size = new System.Drawing.Size(121, 23);
+            this.btnLoguearAdmin.Size = new System.Drawing.Size(186, 23);
             this.btnLoguearAdmin.TabIndex = 7;
             this.btnLoguearAdmin.Text = "Logueo Admin";
             this.btnLoguearAdmin.UseVisualStyleBackColor = true;
@@ -123,9 +125,9 @@ namespace Bar
             // 
             // btnLoguearNoAdmin
             // 
-            this.btnLoguearNoAdmin.Location = new System.Drawing.Point(24, 268);
+            this.btnLoguearNoAdmin.Location = new System.Drawing.Point(12, 386);
             this.btnLoguearNoAdmin.Name = "btnLoguearNoAdmin";
-            this.btnLoguearNoAdmin.Size = new System.Drawing.Size(121, 23);
+            this.btnLoguearNoAdmin.Size = new System.Drawing.Size(186, 23);
             this.btnLoguearNoAdmin.TabIndex = 8;
             this.btnLoguearNoAdmin.Text = "Logueo No Admin";
             this.btnLoguearNoAdmin.UseVisualStyleBackColor = true;
@@ -135,10 +137,11 @@ namespace Bar
             // 
             this.lblNoDni.AutoSize = true;
             this.lblNoDni.ForeColor = System.Drawing.Color.Red;
-            this.lblNoDni.Location = new System.Drawing.Point(130, 30);
+            this.lblNoDni.Location = new System.Drawing.Point(97, 44);
             this.lblNoDni.Name = "lblNoDni";
             this.lblNoDni.Size = new System.Drawing.Size(79, 15);
             this.lblNoDni.TabIndex = 9;
+            this.lblNoDni.Tag = "Error";
             this.lblNoDni.Text = "Escriba el DNI";
             this.lblNoDni.Visible = false;
             // 
@@ -148,11 +151,12 @@ namespace Bar
             this.btbSalir.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btbSalir.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btbSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btbSalir.Image = ((System.Drawing.Image)(resources.GetObject("btbSalir.Image")));
-            this.btbSalir.Location = new System.Drawing.Point(278, 259);
+            this.btbSalir.Image = global::Bar.Properties.Resources._1492790919_81power_84209;
+            this.btbSalir.Location = new System.Drawing.Point(241, 376);
             this.btbSalir.Name = "btbSalir";
             this.btbSalir.Size = new System.Drawing.Size(42, 42);
             this.btbSalir.TabIndex = 10;
+            this.btbSalir.Tag = "conImagen";
             this.btbSalir.UseVisualStyleBackColor = true;
             this.btbSalir.Click += new System.EventHandler(this.btbSalir_Click);
             // 
@@ -161,7 +165,8 @@ namespace Bar
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(332, 313);
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.ClientSize = new System.Drawing.Size(295, 430);
             this.Controls.Add(this.btbSalir);
             this.Controls.Add(this.lblNoDni);
             this.Controls.Add(this.btnLoguearNoAdmin);
@@ -173,7 +178,7 @@ namespace Bar
             this.Controls.Add(this.btnLoguear);
             this.Controls.Add(this.lblClave);
             this.Controls.Add(this.lblDni);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Login";

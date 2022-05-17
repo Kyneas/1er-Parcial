@@ -27,7 +27,7 @@ namespace Entidades
             this.listaComida = listaComida;
             this.usoCredito = usoCredito;
             this.usoEstacionamiento = usoEstacionamiento;
-            this.saldoTotal = VerificarSaldoTotal();
+            this.saldoTotal = this.SaldoTotal;
             this.consumision = ListarConsumisiones();
         }
 
@@ -35,6 +35,43 @@ namespace Entidades
         {
             recargoCredito = 1.1f;
             recargoEstacionamiento = 50;
+        }
+
+        public bool UsoCredito
+        {
+            get 
+            {
+                return this.usoCredito;
+            }
+        }
+
+        public bool UsoEstacionamiento
+        {
+            get
+            {
+                return this.usoEstacionamiento;
+            }
+        }
+
+        public float SaldoParcial 
+        {
+            get { return this.saldo; }
+        }
+
+        public float SaldoTotal 
+        {
+            //set { this.saldoTotal = VerificarSaldoTotal();}
+            get { return VerificarSaldoTotal(); }
+        }
+
+        public static float RecargoCredito 
+        {
+            get { return recargoCredito; }
+        }
+
+        public static int RecargoEstacionamiento 
+        {
+            get { return recargoEstacionamiento; }
         }
 
         public DateTime FechaVenta 
@@ -83,7 +120,7 @@ namespace Entidades
             {
                 sb.AppendLine($"*Recargo estacionamiento {Venta.recargoEstacionamiento}");
             }
-            sb.AppendLine($"Saldo total: {this.saldoTotal}");
+            sb.AppendLine($"Saldo total: {this.SaldoTotal}");
             return sb.ToString();
         }
     }

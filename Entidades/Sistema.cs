@@ -28,6 +28,27 @@ namespace Entidades
             CargarPosicionesHardcodeadas();
         }
 
+        public static void ClonarLista(Dictionary<int, Alimento> diccionarioOrigen, Dictionary<int, Alimento> diccionarioDestino) 
+        {
+            Dictionary<int, Alimento> copiaDeDiccionario = new Dictionary<int, Alimento>();
+
+            foreach (KeyValuePair<int, Alimento> item in diccionarioOrigen)//HAGO COPIA DE LISTA COMIDAS DE SISTEMA
+            {
+                if (item.Value is Comida)
+                {
+                    diccionarioDestino.Add(item.Key, new Comida(diccionarioOrigen[item.Key].Nombre,
+                    diccionarioOrigen[item.Key].Precio, diccionarioOrigen[item.Key].Cantidad, diccionarioOrigen[item.Key].Stock,
+                    ((Comida)diccionarioOrigen[item.Key]).Vegano));
+                }
+                else
+                {
+                    diccionarioDestino.Add(item.Key, new Bebida(diccionarioOrigen[item.Key].Nombre,
+                    diccionarioOrigen[item.Key].Precio, diccionarioOrigen[item.Key].Cantidad, diccionarioOrigen[item.Key].Stock,
+                    ((Bebida)diccionarioOrigen[item.Key]).Presentacion));
+                }
+            }
+        }
+
         private static void CargarUsuariosHardcodeados()
         {
             listaEmpleados.Add(12, new Persona("Matias", "Ferreira", "asd123", true));
