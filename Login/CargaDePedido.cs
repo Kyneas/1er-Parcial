@@ -25,7 +25,13 @@ namespace Bar
         {
             InitializeComponent();
         }
-
+        /// <summary>
+        /// Genera una copia de Alimentos de la lista de Alimentos, y una copia de la posicion
+        /// </summary>
+        /// <param name="mesa">Numero de mesa</param>
+        /// <param name="lugarOriginal">Direccion de la mesa original</param>
+        /// <param name="esAdmin">Permisos de administrador</param>
+        /// <param name="listaDeMenuPrincipal">listView del menu principal</param>
         public CargaDePedido(int mesa, Posicion lugarOriginal, bool esAdmin, ListView listaDeMenuPrincipal) : this()
         {
             this.mesa = mesa;
@@ -36,45 +42,16 @@ namespace Bar
 
             this.lugarCopia = new Posicion(lugarOriginal.Lugar);
 
-
-            //foreach (KeyValuePair<int, Alimento> item in Sistema.listaAlimentos)//HAGO COPIA DE LISTA COMIDAS DE SISTEMA
-            //{
-            //    if (item.Value is Comida)
-            //    {
-            //        this.copiaDeListaDeComidasDelSistema.Add(item.Key, new Comida(Sistema.listaAlimentos[item.Key].Nombre,
-            //        Sistema.listaAlimentos[item.Key].Precio, Sistema.listaAlimentos[item.Key].Cantidad, Sistema.listaAlimentos[item.Key].Stock,
-            //        ((Comida)Sistema.listaAlimentos[item.Key]).Vegano));
-            //    }
-            //    else
-            //    {
-            //        this.copiaDeListaDeComidasDelSistema.Add(item.Key, new Bebida(Sistema.listaAlimentos[item.Key].Nombre,
-            //        Sistema.listaAlimentos[item.Key].Precio, Sistema.listaAlimentos[item.Key].Cantidad, Sistema.listaAlimentos[item.Key].Stock,
-            //        ((Bebida)Sistema.listaAlimentos[item.Key]).Presentacion));
-            //    }
-            //}
-
-            //foreach (KeyValuePair<int, Alimento> item in lugarOriginal.ListaComidaPedida)
-            //{
-            //    if (item.Value is Comida)
-            //    {
-            //        this.lugarCopia.ListaComidaPedida.Add(item.Key, new Comida(lugarOriginal.ListaComidaPedida[item.Key].Nombre,
-            //        lugarOriginal.ListaComidaPedida[item.Key].Precio, lugarOriginal.ListaComidaPedida[item.Key].Cantidad, lugarOriginal.ListaComidaPedida[item.Key].Stock,
-            //        ((Comida)lugarOriginal.ListaComidaPedida[item.Key]).Vegano));
-            //    }
-            //    else
-            //    {
-            //        this.lugarCopia.ListaComidaPedida.Add(item.Key, new Bebida(lugarOriginal.ListaComidaPedida[item.Key].Nombre,
-            //        lugarOriginal.ListaComidaPedida[item.Key].Precio, lugarOriginal.ListaComidaPedida[item.Key].Cantidad, lugarOriginal.ListaComidaPedida[item.Key].Stock,
-            //        ((Bebida)lugarOriginal.ListaComidaPedida[item.Key]).Presentacion));
-            //    }
-            //}
-
             Sistema.ClonarLista(Sistema.listaAlimentos, this.copiaDeListaDeComidasDelSistema);
             Sistema.ClonarLista(lugarOriginal.ListaComidaPedida, this.lugarCopia.ListaComidaPedida);
 
             this.listaDeMenuPrincipal = listaDeMenuPrincipal;
         }
-
+        /// <summary>
+        /// Modifica los colores, solo permite que se quiten pedidos en caso de ser admin, muestra saldos y agrega elementos a las listView
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CargaDePedido_Load(object sender, EventArgs e)
         {
             LogicaForms.CambiarColores(this);
@@ -83,34 +60,36 @@ namespace Bar
             btnMenos.Visible = esAdmin;
             lblSaldo.Text = $"Saldo: ${lugarCopia.Saldo}";
             lblNumeroMesa.Text = $"Mesa {mesa}";
-            ValidarSiHabiaSaldoParaHabilitarBotones();
+            ValidarSiActualmenteHaySaldoParaHabilitarBotones();
             AgregarTodasLosAlimentosDisponiblesALista();
-
-            lvwComidaEnMesa.Items.Clear();
-            foreach (KeyValuePair<int, Alimento> item in lugarCopia.ListaComidaPedida)
-            {
-                if (item.Value.Cantidad > 0)
-                    LogicaForms.AgregarFilaAListView(lvwComidaEnMesa, item.Key.ToString(), item.Value.NombreCompleto, item.Value.Precio.ToString(), item.Value.Cantidad.ToString());
-            }
+            AgregarAListaLaComidaQueSePidio();
         }
-
+        /// <summary>
+        /// Agrega todos los alimentos disponibles a la listView (segun la ubicacion), indicando por medio del color una alerta en base al stock
+        /// </summary>
         public void AgregarTodasLosAlimentosDisponiblesALista()
         {
             ListViewItem filaLista = null;
             lvwListaAlimentos.Items.Clear();
             foreach (KeyValuePair<int, Alimento> item in this.copiaDeListaDeComidasDelSistema)
             {
-                filaLista = LogicaForms.AgregarFilaAListView(lvwListaAlimentos, item.Key.ToString(), item.Value.NombreCompleto, item.Value.Precio.ToString(), item.Value.Stock.ToString());
-                filaLista.BackColor = Color.LightGreen;
-                if (item.Value.Stock <= 10)
-                    filaLista.BackColor = Color.Gold;
-                if (item.Value.Stock < 5)
-                    filaLista.BackColor = Color.Coral;
-                if (item.Value.Stock == 0)
-                    filaLista.BackColor = Color.Crimson;
+                if (this.lugarOriginal.Lugar == Posicion.Donde.Mesa || this.lugarOriginal.Lugar == Posicion.Donde.Barra && item.Value is Bebida)
+                {
+                    filaLista = LogicaForms.AgregarFilaAListView(lvwListaAlimentos, item.Key.ToString(), item.Value.NombreCompleto, item.Value.Precio.ToString(), item.Value.Stock.ToString());
+                    filaLista.BackColor = Color.LightGreen;
+                    if (item.Value.Stock <= 10)
+                        filaLista.BackColor = Color.Gold;
+                    if (item.Value.Stock < 5)
+                        filaLista.BackColor = Color.Coral;
+                    if (item.Value.Stock == 0)
+                        filaLista.BackColor = Color.Crimson;
+                }
+                
             }
         }
-
+        /// <summary>
+        /// Agrega todos los alimentos que la mesa pidio a la listView
+        /// </summary>
         public void AgregarAListaLaComidaQueSePidio()
         {
             lvwComidaEnMesa.Items.Clear();
@@ -119,7 +98,12 @@ namespace Bar
                 LogicaForms.AgregarFilaAListView(lvwComidaEnMesa, item.Key.ToString(), item.Value.NombreCompleto, item.Value.Precio.ToString(), item.Value.Cantidad.ToString());
             }
         }
-
+        /// <summary>
+        /// Al presionar el boton + el alimento se agrega a la comida pedida, modificando stocks. En caso de que el stock sea 0, el boton se deshabilita
+        /// Tambien verifica si se cargo algo para permitir cerrar la mesa
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnMas_Click(object sender, EventArgs e)
         {
             if (lvwListaAlimentos.SelectedItems.Count > 0)
@@ -141,6 +125,12 @@ namespace Bar
             }
 
         }
+        /// <summary>
+        /// Al presionar el boton - quita alimentos de la comida pedida y vuelve a sumar stock. En caso de que la cantidad de ese alimento seleccionado
+        /// sea 0 deshabilita el boton. Tambien valida que haya algun alimento en mesa para permitir o no cerrarla.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnMenos_Click(object sender, EventArgs e)
         {
             if (lvwListaAlimentos.SelectedItems.Count > 0)
@@ -161,6 +151,11 @@ namespace Bar
                 lblSaldo.Text = $"Saldo: ${lugarCopia.Saldo}";
             }
         }
+        /// <summary>
+        /// Resta stock de la comida ingresada. En caso de que la mesa ya tenga algun alimento de ese tipo, le suma 1, en caso contrario 
+        /// instancia un nuevo alimento de ese tipo y setea la cantidad en 1.
+        /// </summary>
+        /// <param name="id"></param>
         private void AgregarOSumarComida(int id)
         {
             if (this.lugarCopia.ListaComidaPedida.ContainsKey(id))
@@ -185,7 +180,11 @@ namespace Bar
                 this.copiaDeListaDeComidasDelSistema[id].Stock--;
             }
         }
-
+        /// <summary>
+        /// Actuliza stocks, confirma cambios y abre el formulario correspondiente al cierre total de la mesa
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCerrar_Click(object sender, EventArgs e)//Boton CERRAR MESA
         {
             ActualizarStocksPorPedidoHecho();
@@ -195,7 +194,13 @@ namespace Bar
                 this.Dispose();
             }
         }
-
+        /// <summary>
+        /// Al clickear un alimento de los disponibles guarda el id. Tambien verifica stocks de esa comida, en caso de ser 0
+        /// deshabilita la posibilidad de agregar mas. Y verifica si la mesa ya tiene algun alimento cargado de ese tipo, de no tenerlo
+        /// impide que se puedan restar.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lvwListaAlimentos_Click(object sender, EventArgs e)
         {
 
@@ -222,24 +227,19 @@ namespace Bar
                 }
             }
         }
-
+        /// <summary>
+        /// Actualiza los stock y cierra el form.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btbConfirmarPedido_Click(object sender, EventArgs e)
         {
             ActualizarStocksPorPedidoHecho();
             this.Dispose();
         }
-
-        private void ValidarSiHabiaSaldoParaHabilitarBotones()
-        {
-            if (lugarOriginal.Saldo == 0)
-            {
-                btnCerrarMesa.Enabled = false;
-            }
-            else
-            {
-                btnCerrarMesa.Enabled = true;
-            }
-        }
+        /// <summary>
+        /// Verifica si tiene alimentos cargados para permitir o no cerrar la mesa.
+        /// </summary>
 
         private void ValidarSiActualmenteHaySaldoParaHabilitarBotones()
         {
@@ -252,7 +252,10 @@ namespace Bar
                 btnCerrarMesa.Enabled = true;
             }
         }
-
+        /// <summary>
+        /// Actualiza los stocks del sistema en base a lo que la mesa pidio. Modifica la lista original de Alimentos del sistema y
+        /// tambien la lista de comida pedida de la posicion
+        /// </summary>
         private void ActualizarStocksPorPedidoHecho()
         {
             List<int> listaDeComidasABorrar = new List<int>();
@@ -311,7 +314,11 @@ namespace Bar
                 btnMenos.Enabled = false;
             }
         }
-
+        /// <summary>
+        /// Agrega stock al sistema luego de restar un Alimento. Si es el ultimo Alimento de ese tipo que tiene la mesa,
+        /// lo quita de la lista, sino resta en 1 la cantidad.
+        /// </summary>
+        /// <param name="id"></param>
         private void RestarOQuitarComida(int id)
         {
             if (this.lugarCopia.ListaComidaPedida[id].Cantidad == 1)

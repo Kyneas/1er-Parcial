@@ -13,6 +13,13 @@ namespace Bar
 {
     public static class LogicaForms
     {
+        /// <summary>
+        /// Agrega un fila con 2 columnas a la ListView
+        /// </summary>
+        /// <param name="lista"></param>
+        /// <param name="item1"></param>
+        /// <param name="item2"></param>
+        /// <returns></returns>
         public static ListViewItem AgregarFilaAListView(ListView lista, string item1, string item2)
         {
             String[] fila = { item1, item2};
@@ -43,7 +50,10 @@ namespace Bar
             lista.Items.Add(item);
             return item;
         }
-
+        /// <summary>
+        /// Cierra cualquier formualario que este dentro del panel
+        /// </summary>
+        /// <param name="panel"></param>
         public static void CerrarFormulariosDelPanel(Panel panel) 
         {
             foreach (Form item in panel.Controls)

@@ -30,7 +30,11 @@ namespace Bar
             this.sonidoAbrirMesa = new SoundPlayer(Properties.Resources.modAbrirMesa);
             this.sonidoSalir = new SoundPlayer(Properties.Resources.exit);
         }
-
+        /// <summary>
+        /// Agrega mesas, modifica los colores y hace visible el panel en caso de ser admin
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MenuPrincipal_Load(object sender, EventArgs e)
         {
             AgregarTodasLasPosiciones();
@@ -38,7 +42,9 @@ namespace Bar
             this.pnlAdminArriba.Visible = usuario.EsAdmin;
 
         }
-
+        /// <summary>
+        /// Borra la ListView, y luego agrega todas las mesas
+        /// </summary>
         public void AgregarTodasLasPosiciones()
         {
             lvwUbicaciones.Items.Clear();
@@ -46,7 +52,6 @@ namespace Bar
             foreach (KeyValuePair<int, Posicion> item in Sistema.listaPosiciones)
             {
                 filaLista = LogicaForms.AgregarFilaAListView(lvwUbicaciones, item.Key.ToString(), item.Value.Lugar.ToString(), item.Value.Saldo.ToString());
-                //filaLista.BackColor = Color.FromArgb(179, 229, 44);
                 filaLista.BackColor = Color.FromArgb(40, 40, 40);
                 if (item.Value.Saldo > 0)
                     filaLista.BackColor = Color.FromArgb(238, 154, 73);
@@ -70,7 +75,11 @@ namespace Bar
             e.Cancel = true;
             e.NewWidth = lvwUbicaciones.Columns[e.ColumnIndex].Width;
         }
-
+        /// <summary>
+        /// Al clickear una mesa en la lista, cierra lo que hay dentro del panel y abre el form de carga de pedido
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lvwUbicaciones_Click(object sender, EventArgs e)
         {
             mesaSeleccionada = lvwUbicaciones.SelectedIndices[0];
@@ -84,7 +93,11 @@ namespace Bar
             sonidoAbrirMesa.Play();
             menuPedido.Show();
         }
-
+        /// <summary>
+        /// Actualiza la lista cuando el form principal vuelve a estar activo
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MenuPrincipal_Activated(object sender, EventArgs e)
         {
             AgregarTodasLasPosiciones();
@@ -109,12 +122,18 @@ namespace Bar
                 e.Handled = true;
             }
         }
-
+        /// <summary>
+        /// Abre el form de carga de pedido de la mesa ingresa en caso de existir
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnIrAMesa_Click(object sender, EventArgs e)
         {
             IrAMesa();
         }
-
+        /// <summary>
+        /// Valida que la mesa ingresa exista y abre el form correspondiente para la carga del pedido, caso contrario avisa al usuario que el numero es incorrecto
+        /// </summary>
         private void IrAMesa() 
         {
             if (Sistema.ExisteMesa(this.txtBuscarMesa.Text, out int mesa))
@@ -132,13 +151,17 @@ namespace Bar
                 MessageBox.Show("No existe la mesa.");
             }
         }
-
+        /// <summary>
+        /// Abre el form de Administrador, 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAdmin_Click(object sender, EventArgs e)
         {
             AgregarTodasLasPosiciones();
 
             LogicaForms.CerrarFormulariosDelPanel(this.pnlPrincipal);
-            lvwUbicaciones.Items[mesaSeleccionada].Selected = false;
+            //lvwUbicaciones.Items[mesaSeleccionada].Selected = false;
             MenuAdministracion menuAdmin = new MenuAdministracion();
             menuAdmin.TopLevel = false;
             pnlPrincipal.Controls.Add(menuAdmin);

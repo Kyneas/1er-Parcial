@@ -27,7 +27,11 @@ namespace Entidades
             CargarAlimentosHardcodeados();
             CargarPosicionesHardcodeadas();
         }
-
+        /// <summary>
+        /// Clona un Diccionario de int/Alimento generando nuevas direcciones de memoria para la informacion
+        /// </summary>
+        /// <param name="diccionarioOrigen"></param>
+        /// <param name="diccionarioDestino"></param>
         public static void ClonarLista(Dictionary<int, Alimento> diccionarioOrigen, Dictionary<int, Alimento> diccionarioDestino) 
         {
             Dictionary<int, Alimento> copiaDeDiccionario = new Dictionary<int, Alimento>();
@@ -79,7 +83,15 @@ namespace Entidades
             listaAlimentos.Add(++idAlimento, new Bebida("Agua", 25, 0, 14, Bebida.Tamanio.Botella_1500ml));
             listaAlimentos.Add(++idAlimento, new Bebida("Vino", 50, 0, 14, Bebida.Tamanio.Botella_710ml));
         }
-
+        /// <summary>
+        /// Agrega un nuevo usuario al sistema luego de verificar que el DNI no este ingresado previamente
+        /// </summary>
+        /// <param name="dniString"></param>
+        /// <param name="nombre"></param>
+        /// <param name="apellido"></param>
+        /// <param name="clave"></param>
+        /// <param name="esAdmin"></param>
+        /// <returns></returns>
         public static bool CrearNuevoUsuario(string dniString, string nombre, string apellido, string clave, bool esAdmin)
         {
             if (!int.TryParse(dniString, out int dni) ||
@@ -90,7 +102,10 @@ namespace Entidades
             listaEmpleados.Add(dni, new Persona(nombre, apellido, clave, esAdmin));
             return true;
         }
-
+        /// <summary>
+        /// Agrega la venta al sistema y aumenta el contador el 1
+        /// </summary>
+        /// <param name="venta"></param>
         public static void AgregarVenta(Venta venta) 
         {
             listaVentasEfectuadas.Add(++idVenta, venta);
@@ -103,7 +118,10 @@ namespace Entidades
                 return new Comida(nombre, precio, 0, stock, esVegano);
             return null;
         }
-
+        /// <summary>
+        /// Indica si en el sistema hay un administrador o mas
+        /// </summary>
+        /// <returns>True si hay 1 solo, False si hay 2 o mas</returns>
         public static bool HaySoloUnAdministrador() 
         {
             int contador = 0;
@@ -116,18 +134,11 @@ namespace Entidades
                 return true;
             return false;
         }
-
-        public static bool VerificarUsuarioNuevo(string nombre, string apellido, string clave)
-        {
-            if (string.IsNullOrEmpty(nombre.Trim()) || 
-                string.IsNullOrEmpty(apellido.Trim()) ||
-                string.IsNullOrEmpty(clave.Trim()))
-            {
-                return false;
-            }
-            return true;
-        }
-
+        /// <summary>
+        /// Verifica que string brindado sea un nombre valido , sin permitir el ingreso de numeros
+        /// </summary>
+        /// <param name="nombreOApellido"></param>
+        /// <returns></returns>
         public static bool EsNombreOApellidoValido(string nombreOApellido)
         {
             if (string.IsNullOrWhiteSpace(nombreOApellido) || nombreOApellido.Length == 1)
@@ -141,28 +152,47 @@ namespace Entidades
 
             return true;
         }
-
+        /// <summary>
+        /// Verifica que el DNI ingresado sea un numero valido y este dentro del rango permitido
+        /// </summary>
+        /// <param name="stringDni"></param>
+        /// <param name="dni"></param>
+        /// <returns></returns>
         public static bool EsDNIValido(string stringDni, out int dni) 
         {
             if (int.TryParse(stringDni, out dni) && dni > 0 && dni < 45000000)
                 return true;
             return false;
         }
-
+        /// <summary>
+        /// Valida que el precio ingresado sea valido y no sea negativo.
+        /// </summary>
+        /// <param name="stringPrecio"></param>
+        /// <param name="precio"></param>
+        /// <returns>True en caso de ser valido y retorna el valor por out, False caso contrario y un cero por out</returns>
         public static bool EsPrecioValido(string stringPrecio, out float precio) 
         {
             if (float.TryParse(stringPrecio, out precio) && precio > 0)
                 return true;
             return false;
         }
-
+        /// <summary>
+        /// Valida que el stock ingresado sea valido y no sea negativo
+        /// </summary>
+        /// <param name="stringStock"></param>
+        /// <param name="stock"></param>
+        /// <returns>True en caso de ser valido y retorna el valor por out, False caso contrario y un cero por out</returns>
         public static bool EsStockValido(string stringStock, out int stock) 
         {
             if (int.TryParse(stringStock, out stock) && stock >= 0)
                 return true;
             return false;
         }
-
+        /// <summary>
+        /// Valida que el string ingresado sea un clave valida (Mas de 8 caracteres y al menos 1 minuscula, 1 mayuscula y un numero)
+        /// </summary>
+        /// <param name="clave"></param>
+        /// <returns></returns>
         public static bool EsClaveValida(string clave)
         {
             int contadorMinusculas = 0;
@@ -186,14 +216,23 @@ namespace Entidades
 
             return false;
         }
-
+        /// <summary>
+        /// Verifica si existe un usuario con el DNI brindado en el sistema
+        /// </summary>
+        /// <param name="dniString"></param>
+        /// <returns>El usuario en caso de existir, null caso contrario</returns>
         public static Persona ExisteUsuario(string dniString)
         {
             if (String.Empty != dniString && listaEmpleados.ContainsKey(int.Parse(dniString)))
                 return listaEmpleados[int.Parse(dniString)];
                 return null;
         }
-
+        /// <summary>
+        /// Indica si existe la mesa en el sistema
+        /// </summary>
+        /// <param name="mesaABuscarString"></param>
+        /// <param name="mesaInt"></param>
+        /// <returns>True de existir y el valor en int por out, false caso contrario y un cero por out</returns>
         public static bool ExisteMesa(string mesaABuscarString, out int mesaInt) 
         {
             if (!string.IsNullOrEmpty(mesaABuscarString) &&
@@ -206,7 +245,11 @@ namespace Entidades
             mesaInt = 0;
             return false;
         }
-
+        /// <summary>
+        /// Indica si ya existe un Alimento similar en el sistema
+        /// </summary>
+        /// <param name="alimento"></param>
+        /// <returns></returns>
         public static bool ElAlimentoYaEstaEnLaLista(Alimento alimento) 
         {
            if (alimento is Comida)
@@ -228,22 +271,20 @@ namespace Entidades
             }
             return false;
         }
-
-        //public static bool LaBebidaYaEstaEnLaLista(Bebida alimento)
-        //{
-        //    foreach (Alimento item in listaAlimentos.Values)
-        //    {
-        //        if (item is Bebida && (Bebida)item == alimento)
-        //            return true;
-        //    }
-        //    return false;
-        //}
-
+        /// <summary>
+        /// Agrega el Alimento al sistema y aumenta el contador en 1
+        /// </summary>
+        /// <param name="alimento"></param>
         public static void AgregarAlimento(Alimento alimento) 
         {
             listaAlimentos.Add(++idAlimento, alimento);
         }
-
+        /// <summary>
+        /// Valida que la clave ingresada sea la correcta para el usuario
+        /// </summary>
+        /// <param name="usuario"></param>
+        /// <param name="clave"></param>
+        /// <returns></returns>
         public static bool VerificarLogin(Persona usuario, string clave)
         {
             if (usuario.VerificarClaveCorrecta(clave))

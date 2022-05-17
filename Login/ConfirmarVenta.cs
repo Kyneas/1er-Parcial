@@ -34,6 +34,9 @@ namespace Bar
         {
             this.Dispose();
         }
+        /// <summary>
+        /// Verifica cual es la comida pedida y la agrega a la lista
+        /// </summary>
         private void AgregarLaComidaQueSePidioALaListaDelFormulario()
         {
             foreach (Alimento item in posicion.ListaComidaPedida.Values)
@@ -44,7 +47,9 @@ namespace Bar
                 }
             }
         }
-
+        /// <summary>
+        /// Pinta la listViev con todo lo pedido por el cliente
+        /// </summary>
         private void AgregarTodasLasComidasPedidasAListView()
         {
             foreach (Alimento item in comidaPedida)
@@ -61,7 +66,11 @@ namespace Bar
             LogicaForms.CambiarColores(this);
             this.lblSaldoParaCerrar.Font = new Font("Calibri", 20, FontStyle.Bold);
         }
-
+        /// <summary>
+        /// Crea una nueva Venta, la agrega a la lista y luego muestra un mensaje con todos los datos.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnConfirmarCerrar_Click(object sender, EventArgs e)
         {
             Venta ventaEfectuada = new Venta(this.idMesa, this.posicion.Saldo,this.comidaPedida,chbPagaCredito.Checked, chbUsaEstacionamiento.Checked);
@@ -81,7 +90,9 @@ namespace Bar
         {
             ActualizarSaldoMostrado();
         }
-
+        /// <summary>
+        /// Actualiza el saldo mostrado en pantalla en caso de seleccionar el uso de TC o Estacionamiento
+        /// </summary>
         private void ActualizarSaldoMostrado() 
         {
             float saldoAMostrar = saldo;
@@ -89,7 +100,7 @@ namespace Bar
                 saldoAMostrar *= Venta.RecargoCredito;
             if (chbUsaEstacionamiento.Checked)
                 saldoAMostrar += Venta.RecargoEstacionamiento;
-            this.lblSaldoParaCerrar.Text = $"Total: {this.saldo}";
+            this.lblSaldoParaCerrar.Text = $"Total: {saldoAMostrar}";
         }
     }
 }

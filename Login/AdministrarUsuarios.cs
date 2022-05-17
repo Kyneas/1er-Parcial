@@ -25,7 +25,9 @@ namespace Bar
             LogicaForms.CambiarColores(this);
             AgregarTodosLosUsuarios();
         }
-
+        /// <summary>
+        /// Agrega todos los usuarios que tiene el Sistema a la listView
+        /// </summary>
         public void AgregarTodosLosUsuarios() 
         {
             lvwListaUsuariosSistema.Items.Clear();
@@ -38,7 +40,11 @@ namespace Bar
                 admin = String.Empty;
             }
         }
-
+        /// <summary>
+        /// En caso de que el usuario no sea el ultimo administrador, lo quita definitivamente luego de una confirmacion mas del usuario
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnEliminarUsuario_Click(object sender, EventArgs e)
         {
             if (Sistema.HaySoloUnAdministrador() && Sistema.listaEmpleados[dniEmpleadoSeleccionado].EsAdmin)
@@ -73,7 +79,11 @@ namespace Bar
                 this.btnEliminarUsuario.Enabled = false;
             }
         }
-
+        /// <summary>
+        /// Agrega el nuevo usuario en caso de que todos los datos sean correctos y el DNI no se haya cargado previamente
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCrearUsuario_Click(object sender, EventArgs e)
         {
             string nombre = this.txtNombre.Text;

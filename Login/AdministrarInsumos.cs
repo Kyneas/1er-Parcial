@@ -18,7 +18,9 @@ namespace Bar
         {
             InitializeComponent();
         }
-
+        /// <summary>
+        /// Lista todos los alimentos del sistema y los pinta en base al stock disponible
+        /// </summary>
         public void AgregarTodosLosInsumosAListaStock()
         {
             ListViewItem filaLista = null;
@@ -43,7 +45,11 @@ namespace Bar
             this.cboAlimento.SelectedIndex = 0;
             this.rdoLata200ml.Checked = true;
         }
-
+        /// <summary>
+        /// Guarda el ID del alimento seleccionado y habilita la posiblidar de modificar precio/stock
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lvwListaInsumos_Click(object sender, EventArgs e)
         {
             if (lvwListaInsumos.SelectedItems.Count != 0)
@@ -64,7 +70,9 @@ namespace Bar
                 DesactivarBotonesYTextBoxDeLaParteDeEliminar();
             }
         }
-
+        /// <summary>
+        /// Deshabilita la posibilidad de modificar stock/precio
+        /// </summary>
         private void DesactivarBotonesYTextBoxDeLaParteDeEliminar() 
         {
             this.btnEliminarProducto.Enabled = false;
@@ -75,7 +83,11 @@ namespace Bar
             this.txtNuevoPrecio.ReadOnly = true;
             this.txtNuevoStock.ReadOnly = true;
         }
-
+        /// <summary>
+        /// Quita el alimento de la lista previa confirmacion del usuario
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnEliminarProducto_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show($"Confirma que desea eliminar el alimento {Sistema.listaAlimentos[alimentoSeleccionado].NombreCompleto}?",
@@ -86,7 +98,11 @@ namespace Bar
                 DesactivarBotonesYTextBoxDeLaParteDeEliminar();
             }
         }
-
+        /// <summary>
+        /// En caso de ser un precio valido, lo modifica del alimento
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btbCambiarPrecio_Click(object sender, EventArgs e)
         {
             if (Sistema.EsPrecioValido(this.txtNuevoPrecio.Text, out float precio))
@@ -100,7 +116,11 @@ namespace Bar
             }
             this.txtNuevoPrecio.Text = String.Empty;
         }
-
+        /// <summary>
+        /// En caso de ser un stock valido, lo modifica del alimento
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAgregarStock_Click(object sender, EventArgs e)
         {
             if (Sistema.EsStockValido(this.txtNuevoStock.Text, out int stock))
@@ -126,12 +146,15 @@ namespace Bar
         private void txtNuevoPrecio_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (char.IsLetter(e.KeyChar) || e.KeyChar == '.')
-
             {
                 e.Handled = true;
             }
         }
-
+        /// <summary>
+        /// Pinta en el form lo correspondiente en caso de que lo seleccionado en el comboBox sea Comida o Bebida
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cboAlimento_SelectedIndexChanged(object sender, EventArgs e)
         {
             bool seleccionoComida = cboAlimento.SelectedIndex == 0;
@@ -139,7 +162,12 @@ namespace Bar
             this.grpPresentacionBebida.Visible = !seleccionoComida;
             this.chkEsVegano.Visible = seleccionoComida;
         }
-
+        /// <summary>
+        /// En caso de que los datos sean correctos, agregar la Comida/Bebida a la lista
+        /// La comida no puede tener el mismo nombre ni ser Vegana, en caso de las bebidas no pueden repetir nombre ni la presentacion.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btbAgregarProducto_Click(object sender, EventArgs e)
         {
             string nombre = this.txtNombreParaNuevoAlimento.Text;
